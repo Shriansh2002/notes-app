@@ -12,6 +12,8 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
                 />
             ))}
 
+            {notes?.length === 0 && <>No Results Found</>}
+
             <AddNote handleAddNote={handleAddNote} />
         </div>
     );
