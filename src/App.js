@@ -22,7 +22,6 @@ function App() {
   }]);
 
   const [searchText, setSearchText] = useState('');
-  const [darkMode, setDarkMode] = useState(false);
 
   const addNote = (text) => {
     const newNote = {
@@ -40,10 +39,10 @@ function App() {
   };
 
   return (
-    <div className={`${darkMode && 'dark-mode'}`} >
+    <div>
 
       <Container fluid>
-        <Header handleToggleDarkMode={setDarkMode} />
+        <Header />
         <Search handleSearchNote={setSearchText} />
 
         {searchText && <h3>You Searched for {searchText} </h3>}
