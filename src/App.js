@@ -34,7 +34,7 @@ function App() {
   };
 
   const deleteNote = (id) => {
-    const newNotes = notes.filter((note) => note.id !== id);
+    const newNotes = notes?.filter((note) => note.id !== id);
     setNotes(newNotes);
   };
 
@@ -46,7 +46,7 @@ function App() {
         <Search handleSearchNote={setSearchText} />
 
         <NotesList
-          notes={notes.filter((note) =>
+          notes={notes?.filter((note) =>
             note.text.toLowerCase().includes(searchText))
           }
           handleAddNote={addNote}
