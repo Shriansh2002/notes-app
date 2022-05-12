@@ -1,21 +1,24 @@
 import Note from './Note';
 import AddNote from './AddNote';
+import { Grid } from '@nextui-org/react';
 
 const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
     return (
-        <div className='notes-list'>
+        <Grid.Container gap={2}>
             {notes?.map((note, index) => (
-                <Note
-                    note={note}
-                    key={note + index}
-                    handleDeleteNote={handleDeleteNote}
-                />
+                <Grid sm={4} md={3}
+                    key={note + index}>
+                    <Note
+                        note={note}
+                        handleDeleteNote={handleDeleteNote}
+                    />
+                </Grid>
             ))}
 
             {notes?.length === 0 && <>No Results Found</>}
 
             <AddNote handleAddNote={handleAddNote} />
-        </div>
+        </Grid.Container>
     );
 };
 

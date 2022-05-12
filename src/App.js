@@ -4,6 +4,7 @@ import Header from './components/Header';
 import NotesList from './components/NotesList';
 import { nanoid } from 'nanoid';
 import Search from './components/Search';
+import { Container } from '@nextui-org/react';
 
 function App() {
   const [notes, setNotes] = useState([{
@@ -41,7 +42,7 @@ function App() {
   return (
     <div className={`${darkMode && 'dark-mode'}`} >
 
-      <div className="container">
+      <Container fluid>
         <Header handleToggleDarkMode={setDarkMode} />
         <Search handleSearchNote={setSearchText} />
 
@@ -53,7 +54,7 @@ function App() {
           }
           handleAddNote={addNote}
           handleDeleteNote={deleteNote} />
-      </div>
+      </Container >
 
     </div >
   );
