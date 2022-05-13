@@ -1,6 +1,6 @@
 import Note from './Note';
 import AddNote from './AddNote';
-import { Container, Grid } from '@nextui-org/react';
+import { Container, Grid, Text } from '@nextui-org/react';
 
 const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
     return (
@@ -13,6 +13,7 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
 
 
                 <>
+                    <Container><Text>Found {notes?.length} Notes</Text></Container>
                     {notes?.map((note, index) => (
                         <Grid xs={12} md={6}
                             key={note + index}>
@@ -26,7 +27,9 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
                 </>
             }
 
-            <AddNote handleAddNote={handleAddNote} />
+            <Grid>
+                <AddNote handleAddNote={handleAddNote} />
+            </Grid>
         </Grid.Container>
     );
 };
