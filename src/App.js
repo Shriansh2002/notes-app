@@ -16,7 +16,7 @@ function App() {
     let someID = nanoid();
     const newNote = {
       id: someID,
-      text: text,
+      text: text.charAt(0).toUpperCase() + text.slice(1),
       date: new Date().toLocaleDateString()
     };
     await setDoc(doc(db, 'Notes', someID), newNote);

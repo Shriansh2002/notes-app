@@ -11,14 +11,16 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
                     <h3>No Notes Found, Create One Instead 📝  !!</h3>
                 </Container> :
 
+
                 <>
                     {notes?.map((note, index) => (
-                        <Grid md={3} sm={5} xs={4}
+                        <Grid xs={12} md={6}
                             key={note + index}>
                             <Note
                                 note={note}
                                 handleDeleteNote={handleDeleteNote}
                             />
+
                         </Grid>
                     ))}
                 </>

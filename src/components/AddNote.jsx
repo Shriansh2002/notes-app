@@ -41,7 +41,7 @@ const AddNote = ({ handleAddNote }) => {
                     <Button size="sm" light css={{ color: 'white' }}>
                         {charLimit - noteText.length}  Remaining
                     </Button>
-                    <Button size="sm" onClick={handleSave}>Save</Button>
+                    <Button size="sm" onPress={handleSave}>Save</Button>
                 </Row>
             </Card.Footer>
         </Card >

@@ -1,56 +1,62 @@
-import { Button, Card, Divider, Grid, Popover, Row, Text } from '@nextui-org/react';
-import { MdDeleteForever } from 'react-icons/md';
+import { Button, Card, Col, Row, Text, User } from '@nextui-org/react';
 
 const Note = ({ note, handleDeleteNote }) => {
-
     return (
-        <Card shadow={true} hoverable >
-            <Card.Header>{note.date}</Card.Header>
-            <Divider />
+        <Card cover css={{ w: "100%" }}>
+            <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
+                <Col>
+                    <Text size={12} weight="bold" transform="uppercase" color="#ffffffAA">
+                        {note.date}
+                    </Text>
+                    <Text h3 color="white">
+                        {note.text}
+                    </Text>
+                </Col>
+            </Card.Header>
             <Card.Body>
-                <Text>
-                    {note.text}
-                </Text>
+                <Card.Image
+                    showSkeleton
+                    src="https://nextui.org/images/card-example-4.jpeg"
+                    height={400}
+                    width="100%"
+                    alt="Notes Image"
+                />
             </Card.Body>
-            <Divider />
-            <Card.Footer>
-                <Popover >
-                    <Popover.Trigger>
-                        <Button color='error' ripple auto>
-                            Delete
-                            <MdDeleteForever
-                                className='delete-icon'
-                                size='1.3em' />
-                        </Button>
-                    </Popover.Trigger>
-                    <Popover.Content>
-                        <Grid.Container
-                            css={{ borderRadius: "14px", padding: "0.75rem", maxWidth: "330px" }}
-                        >
-                            <Row justify="center" align="center">
-                                <Text b>Confirm</Text>
-                            </Row>
-                            <Row>
-                                <Text>
-                                    Are you sure you want to delete this notes ?
+            <Card.Footer
+                blur
+                css={{
+                    position: "absolute",
+                    bgBlur: "#ffffff",
+                    borderTop: "solid rgba(255, 255, 255, 0.2)",
+                    bottom: 0,
+                    zIndex: 1,
+                }}
+            >
+                <Row>
+                    <Col>
+                        <User
+                            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                            name="Ariana Wattson"
+                            pointer='true'
+                            zoomed='true'
+                        />
+                    </Col>
+                    <Col>
+                        <Row justify="flex-end">
+                            <Button flat auto rounded color="error" onPress={() => handleDeleteNote(note.id)}>
+                                <Text
+                                    css={{ color: "inherit" }}
+                                    size={12}
+                                    weight="bold"
+                                    transform="uppercase"
+                                >
+                                    Delete
                                 </Text>
-                            </Row>
-                            <Grid.Container justify="space-between" alignContent="center">
-                                <Grid>
-                                </Grid>
-                                <Grid>
-                                    <Button size="sm" shadow color="error" onClick={() => handleDeleteNote(note.id)}
-                                    >
-                                        Delete
-                                    </Button>
-                                </Grid>
-                                <Grid></Grid>
-                            </Grid.Container>
-                        </Grid.Container>
-                    </Popover.Content>
-                </Popover>
-
-            </Card.Footer>
+                            </Button>
+                        </Row>
+                    </Col>
+                </Row>
+            </Card.Footer >
         </Card >
     );
 };
