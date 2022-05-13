@@ -28,8 +28,9 @@ const AddNote = ({ handleAddNote }) => {
             <Divider />
             <Card.Body>
                 <Input
-                    placeholder="Type to add a note..."
+                    label="Type to add a note..."
                     value={noteText}
+                    labelPlaceholder="Type to add a note..."
                     onChange={handleChange}
 
                 />

@@ -1,42 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import NotesList from './components/NotesList';
 import { nanoid } from 'nanoid';
 import Search from './components/Search';
 import { Container } from '@nextui-org/react';
+import db from './firebaseConfig';
+import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
 
 function App() {
-  const [notes, setNotes] = useState([{
-    id: nanoid(),
-    text: 'This is my first Note!',
-    date: "15/04/2022"
-  }, {
-    id: nanoid(),
-    text: 'This is my second Note!',
-    date: "11/09/2021"
-  }, {
-    id: nanoid(),
-    text: 'This is my third Note!',
-    date: "13/06/2020"
-  }]);
-
+  const [notes, setNotes] = useState([]);
   const [searchText, setSearchText] = useState('');
 
-  const addNote = (text) => {
+  const addNote = async (text) => {
+    let someID = nanoid();
     const newNote = {
-      id: nanoid(),
+      id: someID,
       text: text,
       date: new Date().toLocaleDateString()
     };
-    const newNotes = [...notes, newNote];
-    setNotes(newNotes);
+    await setDoc(doc(db, 'Notes', someID), newNote);
   };
 
-  const deleteNote = (id) => {
-    const newNotes = notes?.filter((note) => note.id !== id);
-    setNotes(newNotes);
+  const deleteNote = async (id) => {
+    await deleteDoc(doc(db, "Notes", id));
   };
+
+  useEffect(() => {
+    onSnapshot(collection(db, 'Notes'), (snapshot) => {
+      setNotes(snapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
 
   return (
     <div>
