@@ -1,4 +1,4 @@
-import { Container, Grid } from '@nextui-org/react';
+import { Container } from '@nextui-org/react';
 
 const Header = () => {
     return (
