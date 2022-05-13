@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 import Search from './components/Search';
 import { Container } from '@nextui-org/react';
 import db from './firebaseConfig';
-import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc } from "firebase/firestore";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -27,7 +27,8 @@ function App() {
   };
 
   useEffect(() => {
-    onSnapshot(collection(db, 'Notes'), (snapshot) => {
+    const q = query(collection(db, 'Notes'), orderBy("text"));
+    onSnapshot(q, (snapshot) => {
       setNotes(snapshot.docs.map((doc) => doc.data()));
     });
   }, []);
