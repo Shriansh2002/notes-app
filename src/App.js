@@ -27,7 +27,6 @@ function App() {
   };
 
   const editNote = async (id, Newtext) => {
-    // todo: edit doc
     const myDocRef = doc(db, 'Notes', id);
     await setDoc(myDocRef, {
       id: id,

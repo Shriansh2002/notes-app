@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card, Col, Input, Modal, Row, Spacer, Text, User } from '@nextui-org/react';
+import { Button, Card, Col, Input, Modal, Row, Spacer, Text, Tooltip, User } from '@nextui-org/react';
 
 import EditIcon from './icons/EditIcon';
 import DeleteIcon from './icons/DeleteIcon';
@@ -97,9 +97,15 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                 </Modal.Footer>
                             </Modal>
                             <Spacer />
-                            <Button flat auto rounded color="error" onPress={() => handleDeleteNote(note.id)}>
-                                <DeleteIcon />
-                            </Button>
+                            <Tooltip
+                                content="Delete Note"
+                                color="error"
+                            >
+
+                                <Button flat auto rounded color="error" onPress={() => handleDeleteNote(note.id)}>
+                                    <DeleteIcon />
+                                </Button>
+                            </Tooltip>
                         </Row>
                     </Col>
                 </Row>
