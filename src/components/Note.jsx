@@ -1,6 +1,23 @@
-import { Button, Card, Col, Row, Text, User } from '@nextui-org/react';
+import { useState } from 'react';
+import { Button, Card, Col, Input, Modal, Row, Spacer, Text, User } from '@nextui-org/react';
+
+import EditIcon from './icons/EditIcon';
+import DeleteIcon from './icons/DeleteIcon';
 
 const Note = ({ note, handleDeleteNote, handleEditNote }) => {
+    const [visible, setVisible] = useState(false);
+    const [dataFromInput, setDataFromInput] = useState('');
+    const handler = () => setVisible(true);
+
+    const closeHandler = () => {
+        setVisible(false);
+    };
+
+    function getDataFromInput(val) {
+        setDataFromInput(val.target.value);
+    }
+
+
     return (
         <Card cover css={{ w: "100%" }}>
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
@@ -16,7 +33,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
             <Card.Body>
                 <Card.Image
                     showSkeleton
-                    src="https://images.unsplash.com/photo-1471440671318-55bdbb772f93?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8"
+                    src="https://images.unsplash.com/photo-1522881451255-f59ad836fdfb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjB8fG5vdGV8ZW58MHx8MHx8"
                     height={400}
                     width="100%"
                     alt="Notes Image"
@@ -43,25 +60,45 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                     </Col>
                     <Col>
                         <Row justify="flex-end">
-                            <Button flat auto rounded color="primary" onPress={() => handleEditNote(note.id)}>
-                                <Text
-                                    size={12}
-                                    weight="bold"
-                                    transform="uppercase"
-                                >
-                                    Edit
-                                </Text>
+                            <Button flat auto rounded onPress={handler}>
+                                <EditIcon />
                             </Button>
-                            &nbsp;
+                            <Modal
+                                closeButton
+                                aria-labelledby="modal-title"
+                                open={visible}
+                                onClose={closeHandler}>
+                                <Modal.Header>
+                                    <Text id="modal-title" size={18}>
+                                        <Text b size={18}>
+                                            Edit Note
+                                        </Text>
+                                    </Text>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <Input
+                                        clearable
+                                        bordered
+                                        fullWidth
+                                        color="primary"
+                                        size="lg"
+                                        placeholder="New Text"
+                                        required
+                                        onChange={getDataFromInput}
+                                    />
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button auto flat color="error" onClick={closeHandler}>
+                                        Close
+                                    </Button>
+                                    <Button onPress={() => { handleEditNote(note.id, dataFromInput); closeHandler(); }}>
+                                        Submit
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+                            <Spacer />
                             <Button flat auto rounded color="error" onPress={() => handleDeleteNote(note.id)}>
-                                <Text
-                                    css={{ color: "inherit" }}
-                                    size={12}
-                                    weight="bold"
-                                    transform="uppercase"
-                                >
-                                    Delete
-                                </Text>
+                                <DeleteIcon />
                             </Button>
                         </Row>
                     </Col>

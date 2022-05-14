@@ -26,9 +26,14 @@ function App() {
     await deleteDoc(doc(db, "Notes", id));
   };
 
-  const editNote = async (id) => {
+  const editNote = async (id, Newtext) => {
     // todo: edit doc
-    alert('this functionality is under progress');
+    const myDocRef = doc(db, 'Notes', id);
+    await setDoc(myDocRef, {
+      id: id,
+      text: Newtext.charAt(0).toUpperCase() + Newtext.slice(1),
+      date: new Date().toLocaleDateString()
+    }, { merge: false });
   };
 
   useEffect(() => {
