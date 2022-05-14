@@ -7,10 +7,13 @@ import Search from './components/Search';
 import { Container } from '@nextui-org/react';
 import db from './firebaseConfig';
 import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc } from "firebase/firestore";
+import { auth } from './firebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const user = auth.currentUser;
 
   const addNote = async (text) => {
     let someID = nanoid();
@@ -36,6 +39,15 @@ function App() {
   };
 
   useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(`user is present`);
+      }
+      else {
+        console.log(`no user`);
+      }
+    });
+
     const q = query(collection(db, 'Notes'), orderBy("text"));
     onSnapshot(q, (snapshot) => {
       setNotes(snapshot.docs.map((doc) => doc.data()));
@@ -46,7 +58,7 @@ function App() {
     <div>
 
       <Container fluid>
-        <Header />
+        <Header user={user} />
         <Search handleSearchNote={setSearchText} />
 
         {searchText && <h3>You Searched for {searchText} </h3>}
@@ -63,6 +75,6 @@ function App() {
 
     </div >
   );
-}
+};
 
 export default App;
