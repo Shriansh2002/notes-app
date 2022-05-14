@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Input, Row, Text } from '@nextui-org/react';
+import { Button, Card, Divider, Row, Text, Textarea } from '@nextui-org/react';
 import { useState } from 'react';
 
 const AddNote = ({ handleAddNote }) => {
@@ -19,7 +19,7 @@ const AddNote = ({ handleAddNote }) => {
     };
 
     return (
-        <Card css={{ mw: '330px' }} color='secondary'>
+        <Card color='gradient' css={{ height: '300px' }}>
             <Card.Header>
                 <Text style={{ textAlign: 'center', color: 'white' }}>
                     <b>Add New Note </b>
@@ -27,10 +27,10 @@ const AddNote = ({ handleAddNote }) => {
             </Card.Header>
             <Divider />
             <Card.Body>
-                <Input
-                    label="Type to add a note..."
+                <Textarea
+                    size='xl'
                     value={noteText}
-                    labelPlaceholder="Type to add a note..."
+                    placeholder="Type to add a note..."
                     onChange={handleChange}
 
                 />
@@ -41,7 +41,7 @@ const AddNote = ({ handleAddNote }) => {
                     <Button size="sm" light css={{ color: 'white' }}>
                         {charLimit - noteText.length}  Remaining
                     </Button>
-                    <Button size="sm" onPress={handleSave}>Save</Button>
+                    <Button size="sm" color='success' auto ghost onPress={handleSave}>Save</Button>
                 </Row>
             </Card.Footer>
         </Card >

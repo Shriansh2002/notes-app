@@ -15,7 +15,7 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleEditNote }) =
                 <>
                     <Container><Text>Found {notes?.length} Notes</Text></Container>
                     {notes?.map((note, index) => (
-                        <Grid xs={12} md={6}
+                        <Grid xs={12} md={4}
                             key={note + index}>
                             <Note
                                 note={note}
@@ -28,7 +28,7 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleEditNote }) =
                 </>
             }
 
-            <Grid>
+            <Grid xs={12} md={4}>
                 <AddNote handleAddNote={handleAddNote} />
             </Grid>
         </Grid.Container>
