@@ -1,4 +1,4 @@
-import { Avatar, Button, Grid, Tooltip } from '@nextui-org/react';
+import { Avatar, Button, Container, Grid, Tooltip } from '@nextui-org/react';
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from '../firebaseConfig';
 
@@ -14,9 +14,11 @@ const Header = ({ user }) => {
     };
 
     return (
-        <Grid.Container justify='space-between'>
+        <Grid.Container justify='space-between' gap={2}>
             <Grid>
-                <h1>Notes </h1>
+                <Container>
+                    <h1>Notes </h1>
+                </Container>
             </Grid>
 
             <Grid css={{ marginTop: 'auto', marginBottom: 'auto' }}>
