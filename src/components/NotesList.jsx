@@ -2,7 +2,7 @@ import Note from './Note';
 import AddNote from './AddNote';
 import { Container, Grid, Text } from '@nextui-org/react';
 
-const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
+const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleEditNote }) => {
     return (
         <Grid.Container gap={2}>
 
@@ -20,6 +20,7 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
                             <Note
                                 note={note}
                                 handleDeleteNote={handleDeleteNote}
+                                handleEditNote={handleEditNote}
                             />
 
                         </Grid>

@@ -1,6 +1,6 @@
 import { Button, Card, Col, Row, Text, User } from '@nextui-org/react';
 
-const Note = ({ note, handleDeleteNote }) => {
+const Note = ({ note, handleDeleteNote, handleEditNote }) => {
     return (
         <Card cover css={{ w: "100%" }}>
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
@@ -16,7 +16,7 @@ const Note = ({ note, handleDeleteNote }) => {
             <Card.Body>
                 <Card.Image
                     showSkeleton
-                    src="https://nextui.org/images/card-example-4.jpeg"
+                    src="https://images.unsplash.com/photo-1471440671318-55bdbb772f93?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8"
                     height={400}
                     width="100%"
                     alt="Notes Image"
@@ -43,6 +43,16 @@ const Note = ({ note, handleDeleteNote }) => {
                     </Col>
                     <Col>
                         <Row justify="flex-end">
+                            <Button flat auto rounded color="primary" onPress={() => handleEditNote(note.id)}>
+                                <Text
+                                    size={12}
+                                    weight="bold"
+                                    transform="uppercase"
+                                >
+                                    Edit
+                                </Text>
+                            </Button>
+                            &nbsp;
                             <Button flat auto rounded color="error" onPress={() => handleDeleteNote(note.id)}>
                                 <Text
                                     css={{ color: "inherit" }}

@@ -26,6 +26,11 @@ function App() {
     await deleteDoc(doc(db, "Notes", id));
   };
 
+  const editNote = async (id) => {
+    // todo: edit doc
+    alert('this functionality is under progress');
+  };
+
   useEffect(() => {
     const q = query(collection(db, 'Notes'), orderBy("text"));
     onSnapshot(q, (snapshot) => {
@@ -47,7 +52,9 @@ function App() {
             note.text.toLowerCase().includes(searchText.toLowerCase()))
           }
           handleAddNote={addNote}
-          handleDeleteNote={deleteNote} />
+          handleDeleteNote={deleteNote}
+          handleEditNote={editNote}
+        />
       </Container >
 
     </div >
