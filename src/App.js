@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 import Search from './components/Search';
 import { Container } from '@nextui-org/react';
 import db from './firebaseConfig';
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc, getDocs } from "firebase/firestore";
 import { auth } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 
@@ -36,6 +36,15 @@ function App() {
       text: Newtext.charAt(0).toUpperCase() + Newtext.slice(1),
       date: new Date().toLocaleDateString()
     }, { merge: false });
+  };
+
+  const handleDeleteAllNotes = async () => {
+    const querySnap = await getDocs(collection(db, 'Notes'));
+
+    querySnap.forEach((document) => {
+      // console.log(doc.data().id);
+      deleteDoc(doc(db, 'Notes', document.data().id));
+    });
   };
 
   useEffect(() => {
@@ -70,6 +79,7 @@ function App() {
           handleAddNote={addNote}
           handleDeleteNote={deleteNote}
           handleEditNote={editNote}
+          handleDeleteAllNotes={handleDeleteAllNotes}
         />
       </Container >
 

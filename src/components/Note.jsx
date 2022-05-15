@@ -82,7 +82,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                         fullWidth
                                         color="primary"
                                         size="lg"
-                                        placeholder="New Text"
+                                        placeholder={note.text}
                                         required
                                         onChange={getDataFromInput}
                                     />

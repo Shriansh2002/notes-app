@@ -52,7 +52,7 @@ const Header = ({ user }) => {
                         </Tooltip>
                     </>
                     :
-                    <Button onClick={signUpFunction}>
+                    <Button onClick={signUpFunction} size='sm'>
                         Login
                     </Button>
                 }
