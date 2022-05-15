@@ -1,5 +1,16 @@
 import { useState } from 'react';
-import { Button, Card, Col, Input, Modal, Row, Spacer, Text, Tooltip, User } from '@nextui-org/react';
+import {
+    Button,
+    Card,
+    Col,
+    Input,
+    Modal,
+    Row,
+    Spacer,
+    Text,
+    Tooltip,
+    User
+} from '@nextui-org/react';
 
 import EditIcon from './icons/EditIcon';
 import DeleteIcon from './icons/DeleteIcon';

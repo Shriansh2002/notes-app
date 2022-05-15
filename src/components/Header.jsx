@@ -1,16 +1,16 @@
 import { Avatar, Button, Container, Grid, Tooltip } from '@nextui-org/react';
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { auth } from '../firebaseConfig';
+import { useAuth } from '../context/AuthContext';
 
-const Header = ({ user }) => {
+const Header = () => {
+    const { loginWithGoogle, currentUser, logout } = useAuth();
 
-    const signUpFunction = () => {
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => { console.log(err); });
+    const signUpFunction = async () => {
+        try {
+            await loginWithGoogle();
+        }
+        catch {
+            console.log(`error faced here.`);
+        }
     };
 
     return (
@@ -22,14 +22,14 @@ const Header = ({ user }) => {
             </Grid>
 
             <Grid css={{ marginTop: 'auto', marginBottom: 'auto' }}>
-                {user ?
+                {currentUser ?
                     <>
                         <Tooltip placement='bottom'
                             content={
                                 <Button
                                     auto
                                     rounded
-                                    onClick={signOut(auth)}
+                                    onClick={logout}
                                     css={{
                                         maxHeight: "$space$12",
                                         fs: "$tiny",
@@ -45,7 +45,7 @@ const Header = ({ user }) => {
                         >
                             <Avatar
                                 pointer
-                                src={user.photoURL}
+                                src={currentUser?.photoURL}
                                 color="gradient"
                                 bordered
                             />

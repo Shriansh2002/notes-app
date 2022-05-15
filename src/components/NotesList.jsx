@@ -1,9 +1,16 @@
 import { useState } from 'react';
 import Note from './Note';
 import AddNote from './AddNote';
-import { Button, Container, Grid, Modal, Text } from '@nextui-org/react';
+import {
+    Button,
+    Container,
+    Grid,
+    Loading,
+    Modal,
+    Text
+} from '@nextui-org/react';
 
-const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleEditNote, handleDeleteAllNotes }) => {
+const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEditNote, handleDeleteAllNotes }) => {
     const [visible, setVisible] = useState(false);
     const handler = () => setVisible(true);
 
@@ -16,9 +23,10 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleEditNote, han
 
             {notes?.length === 0 ?
                 <Container>
-                    <h3>No Notes Found, Create One Instead 📝  !!</h3>
+                    {!loading ? <><Loading size="xs" />  Loading...</> :
+                        <h3>No Notes Found, Create One Instead 📝  !!</h3>
+                    }
                 </Container> :
-
 
                 <>
                     <Grid.Container justify='space-between'>
@@ -76,6 +84,8 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote, handleEditNote, han
             <Grid xs={12} md={4}>
                 <AddNote handleAddNote={handleAddNote} />
             </Grid>
+
+
         </Grid.Container >
     );
 };

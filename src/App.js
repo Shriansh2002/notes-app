@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
+import { Container } from '@nextui-org/react';
 import './App.css';
+
+// Components 
 import Header from './components/Header';
 import NotesList from './components/NotesList';
-import { nanoid } from 'nanoid';
 import Search from './components/Search';
-import { Container } from '@nextui-org/react';
-import db from './firebaseConfig';
+
+// Firebase 🔥
+import db, { auth } from './firebaseConfig';
 import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc, getDocs } from "firebase/firestore";
-import { auth } from './firebaseConfig';
-import { onAuthStateChanged } from 'firebase/auth';
+import AuthProvider from './context/AuthContext';
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [loading, setLoading] = useState(true);
   const user = auth.currentUser;
 
   const addNote = async (text) => {
@@ -42,29 +46,20 @@ function App() {
     const querySnap = await getDocs(collection(db, 'Notes'));
 
     querySnap.forEach((document) => {
-      // console.log(doc.data().id);
       deleteDoc(doc(db, 'Notes', document.data().id));
     });
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log(`user is present`);
-      }
-      else {
-        console.log(`no user`);
-      }
-    });
-
     const q = query(collection(db, 'Notes'), orderBy("text"));
     onSnapshot(q, (snapshot) => {
       setNotes(snapshot.docs.map((doc) => doc.data()));
     });
+    setLoading(false);
   }, []);
 
   return (
-    <div>
+    <AuthProvider>
 
       <Container fluid>
         <Header user={user} />
@@ -76,6 +71,7 @@ function App() {
           notes={notes?.filter((note) =>
             note.text.toLowerCase().includes(searchText.toLowerCase()))
           }
+          loading={loading}
           handleAddNote={addNote}
           handleDeleteNote={deleteNote}
           handleEditNote={editNote}
@@ -83,7 +79,7 @@ function App() {
         />
       </Container >
 
-    </div >
+    </AuthProvider >
   );
 };
 
