@@ -54,8 +54,8 @@ function App() {
     const q = query(collection(db, 'Notes'), orderBy("text"));
     onSnapshot(q, (snapshot) => {
       setNotes(snapshot.docs.map((doc) => doc.data()));
+      setLoading(false);
     });
-    setLoading(false);
   }, []);
 
   return (
@@ -72,6 +72,7 @@ function App() {
             note.text.toLowerCase().includes(searchText.toLowerCase()))
           }
           loading={loading}
+          user={user}
           handleAddNote={addNote}
           handleDeleteNote={deleteNote}
           handleEditNote={editNote}

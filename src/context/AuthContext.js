@@ -33,14 +33,6 @@ export default function AuthProvider({ children }) {
         });
     }, []);
 
-    useEffect(() => {
-        // if user is logged in from logout state
-        if (currentUser) {
-            console.log('user is present');
-            
-        }
-    });
-
     const value = {
         currentUser, loginWithGoogle, logout
     };
