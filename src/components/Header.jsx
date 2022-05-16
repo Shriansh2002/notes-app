@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, Grid, Text, Tooltip } from '@nextui-org/react';
+import { Avatar, Button, Container, Grid, Row, Text, Tooltip } from '@nextui-org/react';
 import { useAuth } from '../context/AuthContext';
 
 const Header = () => {
@@ -13,6 +13,12 @@ const Header = () => {
         }
     };
 
+    const handleProfileRedirect = () => {
+        console.log('redirect check for profile');
+
+    };
+
+
     return (
         <Grid.Container justify='space-between' gap={2}>
             <Grid>
@@ -25,26 +31,47 @@ const Header = () => {
                 {currentUser ?
                     <Tooltip placement='bottom'
                         content={
-                            <Button
-                                size='md'
-                                rounded
-                                onClick={logout}
-                                css={{
-                                    maxHeight: "$space$12",
-                                    fs: "$tiny",
-                                    fontWeight: "$semibold",
-                                    borderColor: "$primary",
-                                    color: "$white",
-                                }}
-                                color="warning"
-                            >
-                                Logout
-                            </Button>
+                            <Grid.Container>
+                                <Row>
+                                    <Button
+                                        size='md'
+                                        onPress={handleProfileRedirect}
+                                        rounded
+                                        css={{
+                                            maxHeight: "$space$12",
+                                            fs: "$tiny",
+                                            fontWeight: "$semibold",
+                                            borderColor: "$primary",
+                                            color: "$white",
+                                        }}
+                                    >
+                                        Profile
+                                    </Button>
+                                </Row>
+                                <Row>
+                                    <Button
+                                        size='md'
+                                        rounded
+                                        onPress={logout}
+                                        css={{
+                                            marginTop: '$5',
+                                            maxHeight: "$space$12",
+                                            fs: "$tiny",
+                                            fontWeight: "$semibold",
+                                            borderColor: "$primary",
+                                            color: "$white",
+                                        }}
+                                        color="warning"
+                                    >
+                                        Logout
+                                    </Button>
+                                </Row>
+                            </Grid.Container>
                         }
                     >
                         <>
                             <Grid.Container>
-                                <Grid css={{ marginTop: 'auto', marginBottom: 'auto', textAlign: 'center' }}>
+                                <Grid>
                                     <Container>
                                         <Text css={{
                                             textGradient: "45deg, $purple600 -20%, $pink600 100%",
@@ -67,7 +94,7 @@ const Header = () => {
                         </>
                     </Tooltip>
                     :
-                    <Button onClick={signUpFunction} size='sm' bordered>
+                    <Button onPress={signUpFunction} size='sm' bordered>
                         Login With Google
                     </Button>
                 }

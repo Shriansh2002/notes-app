@@ -99,7 +99,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                     />
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button auto flat color="error" onClick={closeHandler}>
+                                    <Button auto flat color="error" onPress={closeHandler}>
                                         Close
                                     </Button>
                                     <Button onPress={() => { handleEditNote(note.id, dataFromInput); closeHandler(); }}>

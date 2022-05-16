@@ -1,84 +1,36 @@
-import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
-import { Container } from '@nextui-org/react';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import './App.css';
+import AuthProvider, { useAuth } from './context/AuthContext';
 
-// Components 
-import Header from './components/Header';
-import NotesList from './components/NotesList';
+// pages
+import Homepage from './pages/Homepage';
+import ProfilePage from './pages/ProfilePage';
 
-// Firebase 🔥
-import db, { auth } from './firebaseConfig';
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc, getDocs } from "firebase/firestore";
-import AuthProvider from './context/AuthContext';
+function PrivateRoute({ children }) {
+  const { currentUser } = useAuth();
+  return currentUser ? children : <Navigate to="/" />;
+}
 
 function App() {
-  const [notes, setNotes] = useState([]);
-  const [searchText, setSearchText] = useState('');
-  const [loading, setLoading] = useState(true);
-  const user = auth.currentUser;
-
-  const addNote = async (text) => {
-    let someID = nanoid();
-    const newNote = {
-      id: someID,
-      text: text.charAt(0).toUpperCase() + text.slice(1),
-      date: new Date().toLocaleDateString()
-    };
-    await setDoc(doc(db, 'Notes', someID), newNote);
-  };
-
-  const deleteNote = async (id) => {
-    await deleteDoc(doc(db, "Notes", id));
-  };
-
-  const editNote = async (id, Newtext) => {
-    const myDocRef = doc(db, 'Notes', id);
-    await setDoc(myDocRef, {
-      id: id,
-      text: Newtext.charAt(0).toUpperCase() + Newtext.slice(1),
-      date: new Date().toLocaleDateString()
-    }, { merge: false });
-  };
-
-  const handleDeleteAllNotes = async () => {
-    const querySnap = await getDocs(collection(db, 'Notes'));
-
-    querySnap.forEach((document) => {
-      deleteDoc(doc(db, 'Notes', document.data().id));
-    });
-  };
-
-  useEffect(() => {
-    const q = query(collection(db, 'Notes'), orderBy("text"));
-    onSnapshot(q, (snapshot) => {
-      setNotes(snapshot.docs.map((doc) => doc.data()));
-      setLoading(false);
-    });
-  }, []);
-
   return (
-    <AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
 
-      <Container fluid>
-        <Header user={user} />
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route exact path='/home' element={<Homepage />} />
 
-        <NotesList
-          notes={notes?.filter((note) =>
-            note.text.toLowerCase().includes(searchText.toLowerCase()))
-          }
-          setSearchText={setSearchText}
-          searchText={searchText}
-          loading={loading}
-          user={user}
-          handleAddNote={addNote}
-          handleDeleteNote={deleteNote}
-          handleEditNote={editNote}
-          handleDeleteAllNotes={handleDeleteAllNotes}
-        />
-      </Container >
+          <Route exact path='/profile'
+            element={
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+            } />
 
-    </AuthProvider >
+        </Routes>
+
+      </AuthProvider>
+    </BrowserRouter>
   );
 };
 

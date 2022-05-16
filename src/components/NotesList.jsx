@@ -54,7 +54,7 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                                             </Grid>
                                             <Grid>
                                                 <Container>
-                                                    <Button size='sm' color='error' onClick={handler}>Delete All</Button>
+                                                    <Button size='sm' color='error' onPress={handler}>Delete All</Button>
                                                     <Modal closeButton
                                                         aria-labelledby="modal-title"
                                                         open={visible}
