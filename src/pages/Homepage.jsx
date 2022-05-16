@@ -56,7 +56,7 @@ const Homepage = () => {
     }, []);
     return (
         <Container fluid>
-            <Header user={user} />
+            <Header title='NOTES' primaryFunction='profile' />
 
             <NotesList
                 notes={notes?.filter((note) =>

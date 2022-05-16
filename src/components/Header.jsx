@@ -1,8 +1,10 @@
 import { Avatar, Button, Container, Grid, Row, Text, Tooltip } from '@nextui-org/react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const Header = () => {
+const Header = ({ title, primaryFunction = 'home' }) => {
     const { loginWithGoogle, currentUser, logout } = useAuth();
+    const navigate = useNavigate();
 
     const signUpFunction = async () => {
         try {
@@ -13,17 +15,12 @@ const Header = () => {
         }
     };
 
-    const handleProfileRedirect = () => {
-        console.log('redirect check for profile');
-
-    };
-
 
     return (
         <Grid.Container justify='space-between' gap={2}>
             <Grid>
                 <Container>
-                    <h1>Notes </h1>
+                    <h1>{title} </h1>
                 </Container>
             </Grid>
 
@@ -35,7 +32,7 @@ const Header = () => {
                                 <Row>
                                     <Button
                                         size='md'
-                                        onPress={handleProfileRedirect}
+                                        onPress={() => { navigate(`/${primaryFunction}`); }}
                                         rounded
                                         css={{
                                             maxHeight: "$space$12",
@@ -45,7 +42,7 @@ const Header = () => {
                                             color: "$white",
                                         }}
                                     >
-                                        Profile
+                                        {primaryFunction?.toUpperCase()}
                                     </Button>
                                 </Row>
                                 <Row>
@@ -63,7 +60,7 @@ const Header = () => {
                                         }}
                                         color="warning"
                                     >
-                                        Logout
+                                        LOGOUT
                                     </Button>
                                 </Row>
                             </Grid.Container>
@@ -71,7 +68,7 @@ const Header = () => {
                     >
                         <>
                             <Grid.Container>
-                                <Grid>
+                                <Grid css={{ marginTop: 'auto', marginBottom: 'auto', textAlign: 'center' }}>
                                     <Container>
                                         <Text css={{
                                             textGradient: "45deg, $purple600 -20%, $pink600 100%",
@@ -92,7 +89,7 @@ const Header = () => {
                                 </Grid>
                             </Grid.Container>
                         </>
-                    </Tooltip>
+                    </Tooltip >
                     :
                     <Button onPress={signUpFunction} size='sm' bordered>
                         Login With Google
