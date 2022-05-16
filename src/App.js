@@ -6,7 +6,6 @@ import './App.css';
 // Components 
 import Header from './components/Header';
 import NotesList from './components/NotesList';
-import Search from './components/Search';
 
 // Firebase 🔥
 import db, { auth } from './firebaseConfig';
@@ -63,14 +62,13 @@ function App() {
 
       <Container fluid>
         <Header user={user} />
-        <Search handleSearchNote={setSearchText} />
-
-        {searchText && <h3>You Searched for {searchText} </h3>}
 
         <NotesList
           notes={notes?.filter((note) =>
             note.text.toLowerCase().includes(searchText.toLowerCase()))
           }
+          setSearchText={setSearchText}
+          searchText={searchText}
           loading={loading}
           user={user}
           handleAddNote={addNote}

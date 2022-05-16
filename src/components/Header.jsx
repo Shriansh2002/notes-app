@@ -67,8 +67,8 @@ const Header = () => {
                         </>
                     </Tooltip>
                     :
-                    <Button onClick={signUpFunction} size='sm'>
-                        Login
+                    <Button onClick={signUpFunction} size='sm' bordered>
+                        Login With Google
                     </Button>
                 }
             </Grid >
