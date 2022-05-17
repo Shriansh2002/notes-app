@@ -3,6 +3,7 @@ import {
     Button,
     Card,
     Col,
+    Grid,
     Input,
     Modal,
     Row,
@@ -19,15 +20,24 @@ import { auth } from '../firebaseConfig';
 const Note = ({ note, handleDeleteNote, handleEditNote }) => {
     const [visible, setVisible] = useState(false);
     const [dataFromInput, setDataFromInput] = useState('');
+    const [error, setError] = useState('');
+
     const user = auth.currentUser;
     const handler = () => setVisible(true);
+    const charLimit = 30;
 
     const closeHandler = () => {
         setVisible(false);
+        setError('');
     };
 
     function getDataFromInput(val) {
-        setDataFromInput(val.target.value);
+        if (charLimit - val.target.value.length > 0) {
+            setError('');
+            setDataFromInput(val.target.value);
+        } else {
+            setError(`Only ${charLimit} Characters Allowed`);
+        }
     }
 
 
@@ -69,6 +79,8 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                             pointer='true'
                             altText='loading...'
                             zoomed='true'
+                            bordered
+                            color='gradient'
                             name={note.user || 'anonymous'}
                             description={note.userEmail}
                         />
@@ -81,6 +93,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                 </Button>
                                 <Modal
                                     closeButton
+                                    preventClose
                                     aria-labelledby="modal-title"
                                     open={visible}
                                     onClose={closeHandler}>
@@ -104,15 +117,29 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                         />
                                     </Modal.Body>
                                     <Modal.Footer>
-                                        <Button auto flat color="error" onPress={closeHandler}>
-                                            Close
-                                        </Button>
-                                        <Button onPress={() => {
-                                            handleEditNote(note.id, dataFromInput, user);
-                                            closeHandler();
-                                        }}>
-                                            Submit
-                                        </Button>
+                                        <Grid.Container>
+                                            <Grid>
+                                                {error &&
+                                                    <Text color='error'>
+                                                        {error}
+                                                    </Text>
+                                                }
+                                            </Grid>
+                                            <Row justify='space-around' align='end'>
+                                                <Button auto flat color="error" onPress={closeHandler}>
+                                                    Close
+                                                </Button>
+                                                <Button onPress={() => {
+                                                    handleEditNote(note.id, dataFromInput, user);
+                                                    closeHandler();
+                                                }}
+                                                    disabled={error && true}
+                                                >
+                                                    Submit
+                                                </Button>
+                                            </Row>
+                                        </Grid.Container>
+
                                     </Modal.Footer>
                                 </Modal>
                                 <Spacer />

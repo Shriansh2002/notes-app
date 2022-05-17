@@ -42,8 +42,10 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                                         <Grid.Container justify='space-between'>
                                             <Grid>
                                                 <Container>
-                                                    {showSearch &&
-                                                        <Text>Found {notes?.length} Notes</Text>
+                                                    {showSearch ?
+                                                        <Text>Found {notes?.length} Notes on Your Profile</Text>
+                                                        :
+                                                        <Text>Total {notes?.length} Notes</Text>
                                                     }
                                                 </Container>
                                             </Grid>
