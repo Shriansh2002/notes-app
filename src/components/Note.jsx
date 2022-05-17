@@ -44,7 +44,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
             <Card.Body>
                 <Card.Image
                     showSkeleton
-                    src="https://images.unsplash.com/photo-1522881451255-f59ad836fdfb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjB8fG5vdGV8ZW58MHx8MHx8"
+                    src="https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80"
                     height={400}
                     width="100%"
                     alt="Notes Image"
@@ -64,9 +64,9 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                     <Col>
                         <User
                             src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                            name="Ariana Wattson"
                             pointer='true'
                             zoomed='true'
+                            name={note.user || 'anonymous'}
                         />
                     </Col>
                     <Col>

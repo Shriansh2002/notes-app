@@ -1,9 +1,12 @@
 import { Button, Card, Divider, Row, Text, Textarea } from '@nextui-org/react';
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const AddNote = ({ handleAddNote }) => {
     const [noteText, setNoteText] = useState('');
     const charLimit = 200;
+
+    const { currentUser } = useAuth();
 
     const handleChange = (event) => {
         if (charLimit - event.target.value.length >= 0) {
@@ -22,7 +25,7 @@ const AddNote = ({ handleAddNote }) => {
         <Card color='gradient' css={{ height: '300px' }}>
             <Card.Header>
                 <Text style={{ textAlign: 'center', color: 'white' }}>
-                    <b>Add New Note </b>
+                    Posting as <b> {currentUser.displayName} </b>
                 </Text>
             </Card.Header>
             <Divider />
@@ -30,9 +33,9 @@ const AddNote = ({ handleAddNote }) => {
                 <Textarea
                     size='xl'
                     value={noteText}
-                    placeholder="Type to add a note..."
+                    placeholder="..."
                     onChange={handleChange}
-
+                    label='Add Your Note Here'
                 />
             </Card.Body>
             <Divider />

@@ -13,7 +13,7 @@ import { useAuth } from '../context/AuthContext';
 import Search from './Search';
 
 
-const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEditNote, handleDeleteAllNotes, searchText, setSearchText }) => {
+const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEditNote, handleDeleteAllNotes, searchText, setSearchText, showSearch, showAddNewNote }) => {
     const [visible, setVisible] = useState(false);
     const handler = () => setVisible(true);
     const { currentUser } = useAuth();
@@ -24,10 +24,12 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
 
     return (
         <>
-            {currentUser &&
+            {currentUser && !showSearch &&
                 <>
                     <Search handleSearchNote={setSearchText} />
-                    {searchText && <h3>You Searched for {searchText} </h3>}
+                    <Container>
+                        {searchText && <h3>You Searched for {searchText} </h3>}
+                    </Container>
                 </>
             }
             <Grid.Container gap={2}>
@@ -41,7 +43,7 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                             <>
                                 {notes?.length === 0 ?
                                     <Container>
-                                        <h3>No Notes Found, Create One Instead 📝  !!</h3>
+                                        <Text h5 color='red'>No Notes Found on Server</Text>
                                     </Container>
                                     :
 
@@ -49,7 +51,9 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                                         <Grid.Container justify='space-between'>
                                             <Grid>
                                                 <Container>
-                                                    <Text>Found {notes?.length} Notes</Text>
+                                                    {showSearch &&
+                                                        <Text>Found {notes?.length} Notes</Text>
+                                                    }
                                                 </Container>
                                             </Grid>
                                             <Grid>
@@ -99,9 +103,12 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                                 }
                             </>
                         }
-                        <Grid xs={12} md={4}>
-                            <AddNote handleAddNote={handleAddNote} />
-                        </Grid>
+
+                        {showAddNewNote &&
+                            <Grid xs={12} md={4}>
+                                <AddNote handleAddNote={handleAddNote} />
+                            </Grid>
+                        }
                     </>
                     :
                     <>

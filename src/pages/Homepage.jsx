@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
 
 // Firebase 🔥
 import db, { auth } from '../firebaseConfig';
@@ -16,15 +15,6 @@ const Homepage = () => {
     const [loading, setLoading] = useState(true);
     const user = auth.currentUser;
 
-    const addNote = async (text) => {
-        let someID = nanoid();
-        const newNote = {
-            id: someID,
-            text: text.charAt(0).toUpperCase() + text.slice(1),
-            date: new Date().toLocaleDateString()
-        };
-        await setDoc(doc(db, 'Notes', someID), newNote);
-    };
 
     const deleteNote = async (id) => {
         await deleteDoc(doc(db, "Notes", id));
@@ -56,7 +46,7 @@ const Homepage = () => {
     }, []);
     return (
         <Container fluid>
-            <Header title='NOTES' primaryFunction='profile' />
+            <Header title='Notes' primaryFunction='profile' />
 
             <NotesList
                 notes={notes?.filter((note) =>
@@ -66,7 +56,6 @@ const Homepage = () => {
                 searchText={searchText}
                 loading={loading}
                 user={user}
-                handleAddNote={addNote}
                 handleDeleteNote={deleteNote}
                 handleEditNote={editNote}
                 handleDeleteAllNotes={handleDeleteAllNotes}
