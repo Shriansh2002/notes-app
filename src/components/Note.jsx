@@ -65,8 +65,9 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                 <Row>
                     <Col>
                         <User
-                            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                            src={note.userPhoto}
                             pointer='true'
+                            altText='loading...'
                             zoomed='true'
                             name={note.user || 'anonymous'}
                             description={note.userEmail}
