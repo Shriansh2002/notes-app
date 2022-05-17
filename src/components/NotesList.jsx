@@ -1,26 +1,17 @@
-import { useState } from 'react';
 import Note from './Note';
 import AddNote from './AddNote';
 import {
-    Button,
     Container,
     Grid,
     Loading,
-    Modal,
     Text
 } from '@nextui-org/react';
 import { useAuth } from '../context/AuthContext';
 import Search from './Search';
 
 
-const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEditNote, handleDeleteAllNotes, searchText, setSearchText, showSearch, showAddNewNote }) => {
-    const [visible, setVisible] = useState(false);
-    const handler = () => setVisible(true);
+const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEditNote, searchText, setSearchText, showSearch, showAddNewNote }) => {
     const { currentUser } = useAuth();
-
-    const closeHandler = () => {
-        setVisible(false);
-    };
 
     return (
         <>
@@ -54,36 +45,6 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                                                     {showSearch &&
                                                         <Text>Found {notes?.length} Notes</Text>
                                                     }
-                                                </Container>
-                                            </Grid>
-                                            <Grid>
-                                                <Container>
-                                                    <Button size='sm' color='error' onPress={handler}>Delete All</Button>
-                                                    <Modal closeButton
-                                                        aria-labelledby="modal-title"
-                                                        open={visible}
-                                                        onClose={closeHandler}>
-                                                        <Modal.Header>
-                                                            <Text b id="modal-title" size={18}>
-                                                                This Will Delete All Notes
-                                                            </Text>
-                                                        </Modal.Header>
-                                                        <Modal.Footer>
-                                                            <Grid.Container justify='space-evenly'>
-                                                                <Grid>
-                                                                    <Button auto flat onPress={closeHandler}>
-                                                                        Close
-                                                                    </Button>
-                                                                </Grid>
-                                                                <Grid>
-                                                                    <Button auto color="error" onPress={() => handleDeleteAllNotes()}>
-                                                                        Delete
-                                                                    </Button>
-                                                                </Grid>
-                                                            </Grid.Container>
-                                                        </Modal.Footer>
-
-                                                    </Modal>
                                                 </Container>
                                             </Grid>
                                         </Grid.Container>

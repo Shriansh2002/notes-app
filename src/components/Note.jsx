@@ -67,6 +67,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                             pointer='true'
                             zoomed='true'
                             name={note.user || 'anonymous'}
+                            description={note.userEmail}
                         />
                     </Col>
                     <Col>

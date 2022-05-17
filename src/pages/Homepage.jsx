@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 // Firebase 🔥
 import db, { auth } from '../firebaseConfig';
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc } from "firebase/firestore";
 import { Container } from '@nextui-org/react';
 
 // components
@@ -25,17 +25,11 @@ const Homepage = () => {
         await setDoc(myDocRef, {
             id: id,
             text: Newtext.charAt(0).toUpperCase() + Newtext.slice(1),
-            date: new Date().toLocaleDateString()
+            date: new Date().toLocaleDateString(),
+            user: auth.currentUser.email
         }, { merge: false });
     };
-
-    const handleDeleteAllNotes = async () => {
-        const querySnap = await getDocs(collection(db, 'Notes'));
-
-        querySnap.forEach((document) => {
-            deleteDoc(doc(db, 'Notes', document.data().id));
-        });
-    };
+    // console.log(auth.currentUser.email);
 
     useEffect(() => {
         const q = query(collection(db, 'Notes'), orderBy("text"));
@@ -58,7 +52,6 @@ const Homepage = () => {
                 user={user}
                 handleDeleteNote={deleteNote}
                 handleEditNote={editNote}
-                handleDeleteAllNotes={handleDeleteAllNotes}
             />
         </Container>
     );

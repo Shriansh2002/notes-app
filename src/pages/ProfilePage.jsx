@@ -1,5 +1,5 @@
 import { Container, Grid, Link, Row, Text } from '@nextui-org/react';
-import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, setDoc, where } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc, where } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
@@ -23,29 +23,11 @@ const ProfilePage = () => {
         await setDoc(myDocRef, {
             id: id,
             text: Newtext.charAt(0).toUpperCase() + Newtext.slice(1),
-            date: new Date().toLocaleDateString()
+            date: new Date().toLocaleDateString(),
+            user: currentUser.displayName,
+            userEmail: currentUser.email
         }, { merge: false });
     };
-
-    const handleDeleteAllNotes = async () => {
-        const querySnap = await getDocs(collection(db, 'Notes'));
-
-        querySnap.forEach((document) => {
-            deleteDoc(doc(db, 'Notes', document.data().id));
-        });
-    };
-
-    useEffect(() => {
-        const refValue = collection(db, 'Notes');
-        const q = query(refValue, where('user', '==', currentUser.displayName), orderBy("text"));
-        onSnapshot(q, (snapshot) => {
-            setNotes(snapshot.docs.map((doc) => doc.data()));
-            setLoading(false);
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-
 
     const handleAddNote = async (text) => {
         let someID = nanoid();
@@ -53,10 +35,21 @@ const ProfilePage = () => {
             id: someID,
             text: text.charAt(0).toUpperCase() + text.slice(1),
             date: new Date().toLocaleDateString(),
-            user: currentUser.displayName
+            user: currentUser.displayName,
+            userEmail: currentUser.email
         };
         await setDoc(doc(db, 'Notes', someID), newNote);
     };
+
+    useEffect(() => {
+        const refValue = collection(db, 'Notes');
+        const q = query(refValue, where('userEmail', '==', currentUser.email), orderBy("text"));
+        onSnapshot(q, (snapshot) => {
+            setNotes(snapshot.docs.map((doc) => doc.data()));
+            setLoading(false);
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Container fluid>
@@ -90,7 +83,6 @@ const ProfilePage = () => {
                     handleAddNote={handleAddNote}
                     handleDeleteNote={deleteNote}
                     handleEditNote={editNote}
-                    handleDeleteAllNotes={handleDeleteAllNotes}
                 />
             </Grid.Container>
 
