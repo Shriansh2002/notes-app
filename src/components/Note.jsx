@@ -14,10 +14,12 @@ import {
 
 import EditIcon from './icons/EditIcon';
 import DeleteIcon from './icons/DeleteIcon';
+import { auth } from '../firebaseConfig';
 
 const Note = ({ note, handleDeleteNote, handleEditNote }) => {
     const [visible, setVisible] = useState(false);
     const [dataFromInput, setDataFromInput] = useState('');
+    const user = auth.currentUser;
     const handler = () => setVisible(true);
 
     const closeHandler = () => {
@@ -103,7 +105,10 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                     <Button auto flat color="error" onPress={closeHandler}>
                                         Close
                                     </Button>
-                                    <Button onPress={() => { handleEditNote(note.id, dataFromInput); closeHandler(); }}>
+                                    <Button onPress={() => {
+                                        handleEditNote(note.id, dataFromInput, user);
+                                        closeHandler();
+                                    }}>
                                         Submit
                                     </Button>
                                 </Modal.Footer>

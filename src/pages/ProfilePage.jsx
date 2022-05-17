@@ -1,45 +1,19 @@
 import { Container, Grid, Link, Row, Text } from '@nextui-org/react';
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc, where } from 'firebase/firestore';
-import { nanoid } from 'nanoid';
+import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import NotesList from '../components/NotesList';
-import { useAuth } from '../context/AuthContext';
-import db from '../firebaseConfig';
+// import { useAuth } from '../context/AuthContext';
+import db, { auth } from '../firebaseConfig';
+
+import { deleteNote, editNote, handleAddNote } from '../func/index';
 
 const ProfilePage = () => {
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const { currentUser } = useAuth();
+    const currentUser = auth.currentUser;
 
-
-    const deleteNote = async (id) => {
-        await deleteDoc(doc(db, "Notes", id));
-    };
-
-    const editNote = async (id, Newtext) => {
-        const myDocRef = doc(db, 'Notes', id);
-        await setDoc(myDocRef, {
-            id: id,
-            text: Newtext.charAt(0).toUpperCase() + Newtext.slice(1),
-            date: new Date().toLocaleDateString(),
-            user: currentUser.displayName,
-            userEmail: currentUser.email
-        }, { merge: false });
-    };
-
-    const handleAddNote = async (text) => {
-        let someID = nanoid();
-        const newNote = {
-            id: someID,
-            text: text.charAt(0).toUpperCase() + text.slice(1),
-            date: new Date().toLocaleDateString(),
-            user: currentUser.displayName,
-            userEmail: currentUser.email
-        };
-        await setDoc(doc(db, 'Notes', someID), newNote);
-    };
 
     useEffect(() => {
         const refValue = collection(db, 'Notes');

@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 
 // Firebase 🔥
 import db, { auth } from '../firebaseConfig';
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query, setDoc } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { Container } from '@nextui-org/react';
+import { deleteNote, editNote } from '../func/index';
+
 
 // components
 import Header from '../components/Header';
@@ -16,19 +18,6 @@ const Homepage = () => {
     const user = auth.currentUser;
 
 
-    const deleteNote = async (id) => {
-        await deleteDoc(doc(db, "Notes", id));
-    };
-
-    const editNote = async (id, Newtext) => {
-        const myDocRef = doc(db, 'Notes', id);
-        await setDoc(myDocRef, {
-            id: id,
-            text: Newtext.charAt(0).toUpperCase() + Newtext.slice(1),
-            date: new Date().toLocaleDateString(),
-            user: auth.currentUser.email
-        }, { merge: false });
-    };
     // console.log(auth.currentUser.email);
 
     useEffect(() => {

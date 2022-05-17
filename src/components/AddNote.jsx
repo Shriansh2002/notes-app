@@ -16,7 +16,7 @@ const AddNote = ({ handleAddNote }) => {
 
     const handleSave = () => {
         if (noteText.trim().length > 0) {
-            handleAddNote(noteText);
+            handleAddNote(noteText, currentUser);
             setNoteText('');
         };
     };
