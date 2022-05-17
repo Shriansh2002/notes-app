@@ -5,6 +5,7 @@ const Search = ({ handleSearchNote }) => {
         <Container style={{ marginBottom: '25px' }}>
             <Input
                 bordered
+                label='Search All Notes Here'
                 size="lg"
                 clearable
                 placeholder="Type to search ..."

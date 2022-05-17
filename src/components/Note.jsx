@@ -72,59 +72,62 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                             description={note.userEmail}
                         />
                     </Col>
-                    <Col>
-                        <Row justify="flex-end">
-                            <Button flat auto rounded onPress={handler}>
-                                <EditIcon />
-                            </Button>
-                            <Modal
-                                closeButton
-                                aria-labelledby="modal-title"
-                                open={visible}
-                                onClose={closeHandler}>
-                                <Modal.Header>
-                                    <Text id="modal-title" size={18}>
-                                        <Text b size={18}>
-                                            Edit Note
-                                        </Text>
-                                    </Text>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <Input
-                                        clearable
-                                        bordered
-                                        fullWidth
-                                        color="primary"
-                                        size="lg"
-                                        placeholder={note.text}
-                                        required
-                                        onChange={getDataFromInput}
-                                    />
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button auto flat color="error" onPress={closeHandler}>
-                                        Close
-                                    </Button>
-                                    <Button onPress={() => {
-                                        handleEditNote(note.id, dataFromInput, user);
-                                        closeHandler();
-                                    }}>
-                                        Submit
-                                    </Button>
-                                </Modal.Footer>
-                            </Modal>
-                            <Spacer />
-                            <Tooltip
-                                content="Delete Note"
-                                color="error"
-                            >
-
-                                <Button flat auto rounded color="error" onPress={() => handleDeleteNote(note.id)}>
-                                    <DeleteIcon />
+                    {note.userEmail === user.email &&
+                        <Col>
+                            <Row justify="flex-end">
+                                <Button flat auto rounded onPress={handler}>
+                                    <EditIcon />
                                 </Button>
-                            </Tooltip>
-                        </Row>
-                    </Col>
+                                <Modal
+                                    closeButton
+                                    aria-labelledby="modal-title"
+                                    open={visible}
+                                    onClose={closeHandler}>
+                                    <Modal.Header>
+                                        <Text id="modal-title" size={18}>
+                                            <Text b size={18}>
+                                                {note.text}
+                                            </Text>
+                                        </Text>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <Input
+                                            clearable
+                                            bordered
+                                            fullWidth
+                                            color="primary"
+                                            size="lg"
+                                            label="Edit Note Text"
+                                            required
+                                            onChange={getDataFromInput}
+                                        />
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button auto flat color="error" onPress={closeHandler}>
+                                            Close
+                                        </Button>
+                                        <Button onPress={() => {
+                                            handleEditNote(note.id, dataFromInput, user);
+                                            closeHandler();
+                                        }}>
+                                            Submit
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                                <Spacer />
+
+                                <Tooltip
+                                    content="Delete Note"
+                                    color="error"
+                                >
+
+                                    <Button flat auto rounded color="error" onPress={() => handleDeleteNote(note.id)}>
+                                        <DeleteIcon />
+                                    </Button>
+                                </Tooltip>
+                            </Row>
+                        </Col>
+                    }
                 </Row>
             </Card.Footer >
         </Card >

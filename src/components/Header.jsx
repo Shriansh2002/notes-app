@@ -17,10 +17,10 @@ const Header = ({ title, primaryFunction = 'home' }) => {
 
 
     return (
-        <Grid.Container justify='space-between' gap={2}>
+        <Grid.Container justify='space-between'>
             <Grid>
                 <Container>
-                    <h1>{title} </h1>
+                    <h2>{title} </h2>
                 </Container>
             </Grid>
 
@@ -85,6 +85,7 @@ const Header = ({ title, primaryFunction = 'home' }) => {
                                         src={currentUser?.photoURL}
                                         color="gradient"
                                         bordered
+                                        size='sm'
                                     />
                                 </Grid>
                             </Grid.Container>
