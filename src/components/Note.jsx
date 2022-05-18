@@ -25,7 +25,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
 
     const user = auth.currentUser;
     const handler = () => setVisible(true);
-    const charLimit = 30;
+    const charLimit = 200;
 
     const closeHandler = () => {
         setVisible(false);
