@@ -44,7 +44,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
     return (
         <Card cover css={{ w: "100%" }}>
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-                <Col>
+                <Col css={{ wordWrap: 'break-word' }}>
                     <Text size={12} weight="bold" transform="uppercase" color="#ffffffAA">
                         {note.date}
                     </Text>
@@ -82,7 +82,8 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                             bordered
                             color='gradient'
                             name={note.user || 'anonymous'}
-                            description={note.userEmail}
+                            description={note.userEmail.length < 26 ? note.userEmail : note.userEmail.substring(0, note.userEmail.lastIndexOf("@"))
+                            }
                         />
                     </Col>
                     {note.userEmail === user.email &&
@@ -142,7 +143,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
 
                                     </Modal.Footer>
                                 </Modal>
-                                <Spacer />
+                                <Spacer x={0.4} />
 
                                 <Tooltip
                                     content="Delete Note"
