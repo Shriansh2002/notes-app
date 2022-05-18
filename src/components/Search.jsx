@@ -5,7 +5,7 @@ const Search = ({ handleSearchNote }) => {
         <Container style={{ marginBottom: '25px' }}>
             <Input
                 bordered
-                label='Search All Notes Here'
+                label={`Search All ${process.env.REACT_APP_APPLICATION_NAME} Here`}
                 size="lg"
                 clearable
                 placeholder="Type to search ..."

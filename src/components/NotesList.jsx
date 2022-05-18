@@ -34,7 +34,7 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                             <>
                                 {notes?.length === 0 ?
                                     <Container>
-                                        <Text h5 color='red'>No Notes Found on Server</Text>
+                                        <Text h5 color='red'>No {process.env.REACT_APP_APPLICATION_NAME} Found on Server</Text>
                                     </Container>
                                     :
 
@@ -43,9 +43,9 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                                             <Grid>
                                                 <Container>
                                                     {showSearch ?
-                                                        <Text>Found {notes?.length} Notes on Your Profile</Text>
+                                                        <Text>Found {notes?.length} {process.env.REACT_APP_APPLICATION_NAME} on Your Profile</Text>
                                                         :
-                                                        <Text>Total {notes?.length} Notes</Text>
+                                                        <Text>Total {notes?.length} {process.env.REACT_APP_APPLICATION_NAME}</Text>
                                                     }
                                                 </Container>
                                             </Grid>
@@ -77,7 +77,7 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                     <>
                         <Container>
                             <Text blockquote size={20} color='error'>
-                                You need to be Logged in to View Notes and Create Notes
+                                You need to be Logged in to View and Create {process.env.REACT_APP_APPLICATION_NAME}
                             </Text>
                         </Container>
                     </>
@@ -88,4 +88,4 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
     );
 };
 
-export default NotesList;;;;;
+export default NotesList;

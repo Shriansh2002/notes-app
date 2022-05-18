@@ -44,7 +44,7 @@ const ProfilePage = () => {
 
                     <Row >
                         <Text h5>
-                            Your Notes
+                            Your {process.env.REACT_APP_APPLICATION_NAME}
                         </Text>
                     </Row>
                 </Container>

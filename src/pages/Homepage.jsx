@@ -29,7 +29,7 @@ const Homepage = () => {
     }, []);
     return (
         <Container fluid>
-            <Header title='Notes' primaryFunction='profile' />
+            <Header title={process.env.REACT_APP_APPLICATION_NAME} primaryFunction='profile' />
 
             <NotesList
                 notes={notes?.filter((note) =>
