@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, Grid, Row, Text, Tooltip } from '@nextui-org/react';
+import { Avatar, Button, Container, Grid, Row, Text, Tooltip, Link } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -20,7 +20,9 @@ const Header = ({ title, primaryFunction = 'home' }) => {
         <Grid.Container justify='space-between'>
             <Grid>
                 <Container>
-                    <h2>{title} </h2>
+                    <Link href="/" css={{ color: 'black' }}>
+                        <h2>{title} </h2>
+                    </Link>
                 </Container>
             </Grid>
 

@@ -10,7 +10,16 @@ import { useAuth } from '../context/AuthContext';
 import Search from './Search';
 
 
-const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEditNote, searchText, setSearchText, showSearch, showAddNewNote }) => {
+const NotesList = ({ loading,
+    notes,
+    handleAddNote,
+    handleDeleteNote,
+    handleEditNote,
+    searchText,
+    setSearchText,
+    showSearch,
+    showAddNewNote,
+    userPresence = true }) => {
     const { currentUser } = useAuth();
 
     return (
@@ -33,9 +42,13 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                             :
                             <>
                                 {notes?.length === 0 ?
-                                    <Container>
-                                        <Text h5 color='red'>No {process.env.REACT_APP_APPLICATION_NAME} Found on Server</Text>
-                                    </Container>
+                                    <>
+                                        {userPresence &&
+                                            <Container>
+                                                <Text h5 color='red'>No {process.env.REACT_APP_APPLICATION_NAME} Found on Server</Text>
+                                            </Container>
+                                        }
+                                    </>
                                     :
 
                                     <>
@@ -43,7 +56,7 @@ const NotesList = ({ loading, notes, handleAddNote, handleDeleteNote, handleEdit
                                             <Grid>
                                                 <Container>
                                                     {showSearch ?
-                                                        <Text>Found {notes?.length} {process.env.REACT_APP_APPLICATION_NAME} on Your Profile</Text>
+                                                        <Text>Found {notes?.length} {process.env.REACT_APP_APPLICATION_NAME} on Profile</Text>
                                                         :
                                                         <Text>Total {notes?.length} {process.env.REACT_APP_APPLICATION_NAME}</Text>
                                                     }

@@ -5,6 +5,7 @@ import {
     Col,
     Grid,
     Input,
+    Link,
     Modal,
     Row,
     Spacer,
@@ -74,17 +75,19 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
             >
                 <Row>
                     <Col>
-                        <User
-                            src={note.userPhoto}
-                            pointer='true'
-                            altText='loading...'
-                            zoomed='true'
-                            bordered
-                            color='gradient'
-                            name={note.user || 'anonymous'}
-                            description={note.userEmail.length < 26 ? note.userEmail : note.userEmail.substring(0, note.userEmail.lastIndexOf("@"))
-                            }
-                        />
+                        <Link href={`/u/${note.userEmail}`}>
+                            <User
+                                src={note.userPhoto}
+                                pointer='true'
+                                altText='loading...'
+                                zoomed='true'
+                                bordered
+                                color='gradient'
+                                name={note.user || 'anonymous'}
+                                description={note.userEmail.length < 26 ? note.userEmail : note.userEmail.substring(0, note.userEmail.lastIndexOf("@"))
+                                }
+                            />
+                        </Link>
                     </Col>
                     {note.userEmail === user.email &&
                         <Col>
