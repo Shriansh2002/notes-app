@@ -21,6 +21,7 @@ import { auth } from '../firebaseConfig';
 const Note = ({ note, handleDeleteNote, handleEditNote }) => {
     const [visible, setVisible] = useState(false);
     const [dataFromInput, setDataFromInput] = useState('');
+    const [fileDataFromInput, setFileDataFromInput] = useState('');
     const [error, setError] = useState('');
 
     const user = auth.currentUser;
@@ -39,6 +40,10 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
         } else {
             setError(`Only ${charLimit} Characters Allowed`);
         }
+    }
+
+    function getFileDataFromInput(val) {
+        setFileDataFromInput(val.target.value);
     }
 
 
@@ -121,6 +126,17 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                             required
                                             onChange={getDataFromInput}
                                         />
+                                        <Input
+                                            clearable
+                                            bordered
+                                            fullWidth
+                                            color="primary"
+                                            size="lg"
+                                            label="Edit Note Image"
+                                            initialValue={note.noteImage}
+                                            required
+                                            onChange={getFileDataFromInput}
+                                        />
                                     </Modal.Body>
                                     <Modal.Footer>
                                         <Grid.Container>
@@ -136,7 +152,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                                     Close
                                                 </Button>
                                                 <Button onPress={() => {
-                                                    handleEditNote(note.id, dataFromInput, user);
+                                                    handleEditNote(note.id, dataFromInput, user, fileDataFromInput);
                                                     closeHandler();
                                                 }}
                                                     disabled={error && true}

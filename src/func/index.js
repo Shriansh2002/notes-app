@@ -6,11 +6,12 @@ export const deleteNote = async (id) => {
     await deleteDoc(doc(db, "Notes", id));
 };
 
-export const editNote = async (id, Newtext, currentUser) => {
+export const editNote = async (id, Newtext, currentUser, photoURL) => {
     const myDocRef = doc(db, 'Notes', id);
     await setDoc(myDocRef, {
         id: id,
         text: Newtext.charAt(0).toUpperCase() + Newtext.slice(1),
+        noteImage: photoURL,
         date: new Date().toLocaleDateString(),
         user: currentUser.displayName,
         userEmail: currentUser.email,
