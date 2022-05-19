@@ -122,6 +122,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                             fullWidth
                                             color="primary"
                                             size="lg"
+                                            placeholder={note.text}
                                             label="Edit Note Text"
                                             required
                                             onChange={getDataFromInput}
@@ -133,7 +134,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                             color="primary"
                                             size="lg"
                                             label="Edit Note Image"
-                                            initialValue={note.noteImage}
+                                            placeholder={!note.noteImage ? '<No Existing Image>' : note.noteImage}
                                             required
                                             onChange={getFileDataFromInput}
                                         />
