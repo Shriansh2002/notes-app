@@ -1,10 +1,12 @@
 import { Avatar, Button, Container, Grid, Row, Text, Tooltip, Link } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Header = ({ title, primaryFunction = 'home' }) => {
     const { loginWithGoogle, currentUser, logout } = useAuth();
     const navigate = useNavigate();
+    const [state, setState] = useState('none');
 
     const signUpFunction = async () => {
         try {
@@ -15,6 +17,16 @@ const Header = ({ title, primaryFunction = 'home' }) => {
         }
     };
 
+    useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth < 375) {
+                setState('none');
+            }
+            else { setState('block'); }
+        }
+
+        window.addEventListener('resize', handleResize);
+    });
 
     return (
         <Grid.Container justify='space-between'>
@@ -74,7 +86,8 @@ const Header = ({ title, primaryFunction = 'home' }) => {
                                     <Container>
                                         <Text css={{
                                             textGradient: "45deg, $purple600 -20%, $pink600 100%",
-                                            cursor: 'pointer'
+                                            cursor: 'pointer',
+                                            display: state
                                         }}>
                                             {currentUser.displayName}
                                         </Text>
