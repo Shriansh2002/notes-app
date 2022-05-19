@@ -19,11 +19,16 @@ export const editNote = async (id, Newtext, currentUser) => {
 };
 
 
-export const handleAddNote = async (text, currentUser) => {
+export const handleAddNote = async (
+    text,
+    currentUser,
+    photoURL = 'https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80'
+) => {
     let someID = nanoid();
     const newNote = {
         id: someID,
         text: text.charAt(0).toUpperCase() + text.slice(1),
+        noteImage: photoURL,
         date: new Date().toLocaleDateString(),
         user: currentUser.displayName,
         userEmail: currentUser.email,

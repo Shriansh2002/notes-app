@@ -1,9 +1,10 @@
-import { Button, Card, Divider, Row, Text, Textarea } from '@nextui-org/react';
+import { Button, Card, Divider, Input, Row, Spacer, Text, Textarea } from '@nextui-org/react';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 const AddNote = ({ handleAddNote }) => {
     const [noteText, setNoteText] = useState('');
+    const [fileImageURL, setFileImageURL] = useState('');
     const charLimit = 200;
 
     const { currentUser } = useAuth();
@@ -14,15 +15,19 @@ const AddNote = ({ handleAddNote }) => {
         }
     };
 
+    const handleFileChange = (e) => {
+        setFileImageURL(e.target.value);
+    };
+
     const handleSave = () => {
         if (noteText.trim().length > 0) {
-            handleAddNote(noteText, currentUser);
+            handleAddNote(noteText, currentUser, fileImageURL);
             setNoteText('');
         };
     };
 
     return (
-        <Card color='gradient' css={{ height: '300px' }}>
+        <Card color='gradient'>
             <Card.Header>
                 <Text style={{ textAlign: 'center', color: 'white' }}>
                     Posting as <b> {currentUser.displayName} </b>
@@ -31,11 +36,18 @@ const AddNote = ({ handleAddNote }) => {
             <Divider />
             <Card.Body>
                 <Textarea
-                    size='xl'
+                    size='md'
                     value={noteText}
-                    placeholder="..."
                     onChange={handleChange}
                     label='Add Your Note Here'
+                />
+                <Spacer />
+                <Input
+                    size='md'
+                    clearable
+                    value={fileImageURL}
+                    label="Background Image URL"
+                    onChange={handleFileChange}
                 />
             </Card.Body>
             <Divider />
