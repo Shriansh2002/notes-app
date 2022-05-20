@@ -4,6 +4,7 @@ import AuthProvider, { useAuth } from './context/AuthContext';
 
 // pages
 import Homepage from './pages/Homepage';
+import Notepage from './pages/Notepage';
 import ProfilePage from './pages/ProfilePage';
 import UserPage from './pages/UserPage.jsx';
 
@@ -32,6 +33,13 @@ function App() {
             element={
               <PrivateRoute>
                 <UserPage />
+              </PrivateRoute>
+            } />
+
+          <Route exact path='/note/:noteID'
+            element={
+              <PrivateRoute>
+                <Notepage />
               </PrivateRoute>
             } />
 
