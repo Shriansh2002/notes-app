@@ -4,6 +4,7 @@ import {
     Container,
     Grid,
     Loading,
+    Row,
     Text
 } from '@nextui-org/react';
 import { useAuth } from '../context/AuthContext';
@@ -35,12 +36,25 @@ const NotesList = ({ loading,
             <Grid.Container gap={2}>
                 {currentUser ?
                     <>
+                        {showAddNewNote &&
+                            <Grid xs={12} md={4}>
+                                <AddNote handleAddNote={handleAddNote} />
+                            </Grid>
+                        }
+
                         {loading ?
                             <Container>
                                 <Loading size="xs" />
                             </Container>
                             :
                             <>
+                                <Container>
+                                    <Row>
+                                        <Text h5>
+                                            Your {process.env.REACT_APP_APPLICATION_NAME}
+                                        </Text>
+                                    </Row>
+                                </Container>
                                 {notes?.length === 0 ?
                                     <>
                                         {userPresence &&
@@ -80,11 +94,7 @@ const NotesList = ({ loading,
                             </>
                         }
 
-                        {showAddNewNote &&
-                            <Grid xs={12} md={4}>
-                                <AddNote handleAddNote={handleAddNote} />
-                            </Grid>
-                        }
+
                     </>
                     :
                     <>

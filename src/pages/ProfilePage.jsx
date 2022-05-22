@@ -41,12 +41,6 @@ const ProfilePage = () => {
                             </Text>
                         </Text>
                     </Row>
-
-                    <Row >
-                        <Text h5>
-                            Your {process.env.REACT_APP_APPLICATION_NAME}
-                        </Text>
-                    </Row>
                 </Container>
 
                 <NotesList
