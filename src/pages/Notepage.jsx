@@ -34,12 +34,22 @@ const Notepage = () => {
                             {noteInfo.length > 0 ?
                                 <>
                                     <Row>
-                                        <Text h2 css={{ margin: 'auto' }}>
-                                            {noteInfo[0].text}
-                                            <Text >
+                                        <Container css={{
+                                            margin: 'auto',
+                                            textAlign: 'center',
+                                        }}>
+                                            <Text h1 css={{
+                                                textGradient: "45deg, $yellow600 -20%, $red600 100%",
+                                            }}>
+                                                {noteInfo[0].text}
+                                            </Text>
+
+
+                                            <Text color='primary'>
                                                 By:&nbsp;{noteInfo[0].userEmail}
                                             </Text>
-                                        </Text>
+
+                                        </Container>
                                     </Row>
                                     <Row>
                                         <Image
