@@ -38,7 +38,7 @@ const UserPage = () => {
 
     return (
         <>
-            {console.log(flag)}
+            {/* {console.log(flag)} */}
             <Container fluid>
                 <Header title='User Profile' />
 
