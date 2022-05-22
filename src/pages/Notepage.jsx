@@ -1,4 +1,4 @@
-import { Container, Grid, Image, Row } from '@nextui-org/react';
+import { Container, Grid, Image, Loading, Row, Text } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
@@ -25,19 +25,45 @@ const Notepage = () => {
 
             <Grid.Container>
                 <Container>
-                    <Row>
-                        {!loading &&
-                            <>
-                                <Image
-                                    src={noteInfo[0]?.noteImage && noteInfo[0].noteImage}
-                                    alt="Default Image"
-                                />
-                            </>
-                        }
-                    </Row>
+
+                    {loading
+                        ?
+                        <Loading size="xs" />
+                        :
+                        <>
+                            {noteInfo.length > 0 ?
+                                <>
+                                    <Row>
+                                        <Text h2 css={{ margin: 'auto' }}>
+                                            {noteInfo[0].text}
+                                            <Text >
+                                                By:&nbsp;{noteInfo[0].userEmail}
+                                            </Text>
+                                        </Text>
+                                    </Row>
+                                    <Row>
+                                        <Image
+                                            src={noteInfo[0].noteImage}
+                                            alt="Default Image"
+                                            css={{ margin: 'none', marginTop: '$0', borderRadius: '$lg' }}
+                                        />
+                                    </Row>
+                                </>
+                                :
+                                <Container>
+                                    <Row>
+                                        <Text h2 css={{ margin: 'auto' }} color='error'>
+                                            NO NOTE FOUND
+                                        </Text>
+                                    </Row>
+                                </Container>
+                            }
+                        </>
+                    }
                 </Container>
-            </Grid.Container>
-        </Container>
+            </Grid.Container >
+
+        </Container >
     );
 };
 
