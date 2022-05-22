@@ -13,7 +13,7 @@ const genreValues = [
 const AddNote = ({ handleAddNote }) => {
     const [noteText, setNoteText] = useState('');
     const [fileImageURL, setFileImageURL] = useState('');
-    const [selected, setSelected] = useState(genreValues[0]);
+    const [genreSelected, setGenreSelected] = useState('Action');
     const charLimit = 200;
 
     const { currentUser } = useAuth();
@@ -30,12 +30,13 @@ const AddNote = ({ handleAddNote }) => {
 
     const handleSave = () => {
         if (noteText.trim().length > 0) {
-            handleAddNote(noteText, currentUser, fileImageURL);
+            console.log(genreSelected);
+            handleAddNote(noteText, currentUser, fileImageURL, genreSelected);
             setNoteText('');
+            setGenreSelected('');
             setFileImageURL('');
         };
     };
-    console.log(selected);
 
     return (
         <Card color='gradient'>
@@ -55,14 +56,14 @@ const AddNote = ({ handleAddNote }) => {
                 <Spacer />
                 <Radio.Group
                     row
-                    value="primary"
+                    value={genreSelected}
                     size='xs'
                     textColor='$white'
                 >
                     {genreValues.map((genItem, index) => (
                         <div key={genItem + index}>
                             <Radio value={genItem} color="success"
-                                onChange={() => setSelected(genItem)}
+                                onChange={() => setGenreSelected(genItem)}
                             >
                                 {genItem}
                             </Radio>
@@ -84,7 +85,7 @@ const AddNote = ({ handleAddNote }) => {
                     <Button size="sm" light css={{ color: 'white' }}>
                         {charLimit - noteText.length}  Remaining
                     </Button>
-                    <Button size="sm" color='success' auto ghost onPress={handleSave}>Save</Button>
+                    <Button size="sm" color='success' auto ghost onClick={handleSave}>Save</Button>
                 </Row>
             </Card.Footer>
         </Card >

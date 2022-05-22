@@ -57,16 +57,26 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
     }, []);
 
     return (
-        <Card cover css={{ w: "100%" }}>
+        <Card cover css={{ w: "100%", p: '0' }}>
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                 <Col css={{ wordWrap: 'break-word' }}>
-                    <Text size={12} weight="bold" transform="uppercase" color="#ffffffAA">
+                    <Text size={12} weight="bold" transform="uppercase" color="$red600"
+                        css={{
+                            textShadow: '-1px 1px 0 #FEF9F0,1px 1px 0 #FEF9F0, 1px -1px 0 #FEF9F0, -1px -1px 0 #FEF9F0'
+                        }}>
                         {note.date}
                     </Text>
-                    <Text h3 color="white">
+                    <Text h3 weight='extrabold' css={{
+                        color: '$white',
+                        fontWeight: '$extrabold',
+                        textShadow: '-1px 1px 0 #000,1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000'
+                    }}>
                         {note.text}
                     </Text>
                 </Col>
+                <Text h4 weight='bold' css={{
+                    textShadow: '-1px 1px 0 #FEF9F0,1px 1px 0 #FEF9F0, 1px -1px 0 #FEF9F0, -1px -1px 0 #FEF9F0'
+                }}>{note?.genre || 'GEN#1'}</Text>
             </Card.Header>
             <Card.Body>
                 <Link href={`/note/${note.id}`}>
@@ -85,8 +95,8 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                 blur
                 css={{
                     position: "absolute",
-                    bgBlur: "#ffffff",
-                    borderTop: "solid rgba(255, 255, 255, 0.2)",
+                    // bgBlur: "#0f1114",
+                    // borderTop: "$borderWeights$light solid $gray700",
                     bottom: 0,
                     zIndex: 1,
                 }}
@@ -102,7 +112,9 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                 bordered
                                 color='gradient'
                                 name={note.user || 'anonymous'}
-                                description={note.userEmail.length < 26 ? note.userEmail : note.userEmail.substring(0, note.userEmail.lastIndexOf("@"))
+                                description={note.userEmail.length < 26
+                                    ? note.userEmail
+                                    : note.userEmail.substring(0, note.userEmail.lastIndexOf("@"))
                                 }
                             />
                         </Link>
@@ -164,7 +176,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                                     Close
                                                 </Button>
                                                 <Button onPress={() => {
-                                                    handleEditNote(note.id, dataFromInput, user, fileDataFromInput);
+                                                    handleEditNote(note.id, dataFromInput, user, fileDataFromInput, note?.genre || 'Action');
                                                     closeHandler();
                                                 }}
                                                     disabled={error && true}
