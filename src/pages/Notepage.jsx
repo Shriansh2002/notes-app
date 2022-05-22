@@ -1,8 +1,16 @@
-import { Container, Grid, Image, Loading, Row, Text } from '@nextui-org/react';
+import {
+    Container,
+    Grid,
+    Image,
+    Loading,
+    Row,
+    Spacer,
+    Text,
+} from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import db from '../firebaseConfig';
 
 const Notepage = () => {
@@ -11,7 +19,7 @@ const Notepage = () => {
     const [noteInfo, setNoteInfo] = useState([]);
 
     useEffect(() => {
-        const q = query(collection(db, "Notes"), where("id", "==", noteID));
+        const q = query(collection(db, 'Notes'), where('id', '==', noteID));
         onSnapshot(q, (snapshot) => {
             setNoteInfo(snapshot.docs.map((doc) => doc.data()));
             setLoading(false);
@@ -21,59 +29,87 @@ const Notepage = () => {
 
     return (
         <Container fluid>
-            <Header title='Note Info' />
+            <Header title="Note Info" />
 
             <Grid.Container>
                 <Container>
-
-                    {loading
-                        ?
+                    {loading ? (
                         <Loading size="xs" />
-                        :
+                    ) : (
                         <>
-                            {noteInfo.length > 0 ?
+                            {noteInfo.length > 0 ? (
                                 <>
                                     <Row>
-                                        <Container css={{
-                                            margin: 'auto',
-                                            textAlign: 'center',
-                                        }}>
-                                            <Text h1 css={{
-                                                textGradient: "45deg, $yellow600 -20%, $red600 100%",
-                                            }}>
+                                        <Container
+                                            css={{
+                                                margin: 'auto',
+                                                textAlign: 'center',
+                                            }}
+                                        >
+                                            <Text
+                                                h1
+                                                css={{
+                                                    textGradient:
+                                                        '45deg, $yellow600 -20%, $red600 100%',
+                                                }}
+                                            >
                                                 {noteInfo[0].text}
                                             </Text>
 
-
-                                            <Text color='primary'>
+                                            <Text color="primary">
                                                 By:&nbsp;{noteInfo[0].userEmail}
                                             </Text>
-
                                         </Container>
                                     </Row>
-                                    <Row>
-                                        <Image
-                                            src={noteInfo[0].noteImage}
-                                            alt="Default Image"
-                                            css={{ margin: 'none', marginTop: '$0', borderRadius: '$lg' }}
-                                        />
-                                    </Row>
+                                    <Image
+                                        src={noteInfo[0].noteImage}
+                                        alt="Default Image"
+                                        css={{
+                                            margin: 'none',
+                                            marginTop: '$0',
+                                            borderRadius: '$lg',
+                                            height: '50vh',
+                                            width: '100vw',
+                                        }}
+                                    />
+
+                                    <Container
+                                        css={{
+                                            margin: 'auto',
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        <Text>🗓{noteInfo[0].date}</Text>
+
+                                        <Grid>
+                                            <Spacer />
+                                            <Text h3>GAME MODES</Text>
+                                            <ul>
+                                                <li>Career Mode</li>
+                                                <li> VOLTA FOOTBALL </li>
+                                                <li>FIFA Ultimate Team</li>
+                                            </ul>
+                                        </Grid>
+                                    </Container>
                                 </>
-                                :
+                            ) : (
                                 <Container>
                                     <Row>
-                                        <Text h2 css={{ margin: 'auto' }} color='error'>
+                                        <Text
+                                            h2
+                                            css={{ margin: 'auto' }}
+                                            color="error"
+                                        >
                                             NO NOTE FOUND
                                         </Text>
                                     </Row>
                                 </Container>
-                            }
+                            )}
                         </>
-                    }
+                    )}
                 </Container>
-            </Grid.Container >
-
-        </Container >
+            </Grid.Container>
+        </Container>
     );
 };
 
