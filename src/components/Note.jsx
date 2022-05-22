@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Button,
     Card,
@@ -46,6 +46,15 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
         setFileDataFromInput(val.target.value);
     }
 
+    useEffect(() => {
+        if (dataFromInput.length < 1) {
+            setDataFromInput(note.text);
+        }
+        if (fileDataFromInput.length < 1) {
+            setFileDataFromInput(note.noteImage);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Card cover css={{ w: "100%" }}>
@@ -66,8 +75,8 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                         src={note?.noteImage ?
                             note.noteImage
                             : "https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80"}
-                        height="100%"
-                        width="100%"
+                        height={400}
+                        width={600}
                         alt="Blog Image"
                     />
                 </Link>
