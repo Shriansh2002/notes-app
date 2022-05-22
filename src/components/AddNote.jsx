@@ -1,10 +1,19 @@
-import { Button, Card, Divider, Input, Row, Spacer, Text, Textarea } from '@nextui-org/react';
+import { Button, Card, Divider, Input, Radio, Row, Spacer, Text, Textarea } from '@nextui-org/react';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+
+const genreValues = [
+    'Action',
+    'Adventure',
+    'Puzzle',
+    'Racing',
+    'Sports'
+];
 
 const AddNote = ({ handleAddNote }) => {
     const [noteText, setNoteText] = useState('');
     const [fileImageURL, setFileImageURL] = useState('');
+    const [selected, setSelected] = useState(genreValues[0]);
     const charLimit = 200;
 
     const { currentUser } = useAuth();
@@ -26,6 +35,7 @@ const AddNote = ({ handleAddNote }) => {
             setFileImageURL('');
         };
     };
+    console.log(selected);
 
     return (
         <Card color='gradient'>
@@ -43,6 +53,23 @@ const AddNote = ({ handleAddNote }) => {
                     label='Add Your Note Here'
                 />
                 <Spacer />
+                <Radio.Group
+                    row
+                    value="primary"
+                    size='xs'
+                    textColor='$white'
+                >
+                    {genreValues.map((genItem, index) => (
+                        <div key={genItem + index}>
+                            <Radio value={genItem} color="success"
+                                onChange={() => setSelected(genItem)}
+                            >
+                                {genItem}
+                            </Radio>
+                            <Spacer />
+                        </div>
+                    ))}
+                </Radio.Group>
                 <Input
                     size='md'
                     clearable
