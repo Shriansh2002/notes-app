@@ -29,7 +29,7 @@ const Notepage = () => {
 
     return (
         <Container fluid>
-            <Header title="Note Info" />
+            <Header title="Blog Info" />
 
             <Grid.Container>
                 <Container>
@@ -79,7 +79,13 @@ const Notepage = () => {
                                             textAlign: 'center',
                                         }}
                                     >
-                                        <Text>🗓{noteInfo[0].date}</Text>
+                                        <Text>Updated On: {noteInfo[0].date}</Text>
+
+                                        <Spacer />
+                                        <Text>
+                                            {noteInfo[0]?.noteDescription && noteInfo[0].noteDescription}
+                                        </Text>
+
 
                                         <Grid>
                                             <Spacer />

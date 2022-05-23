@@ -36,11 +36,6 @@ const NotesList = ({ loading,
             <Grid.Container gap={2}>
                 {currentUser ?
                     <>
-                        {showAddNewNote &&
-                            <Grid xs={12} md={4}>
-                                <AddNote handleAddNote={handleAddNote} />
-                            </Grid>
-                        }
 
                         {loading ?
                             <Container>
@@ -48,6 +43,11 @@ const NotesList = ({ loading,
                             </Container>
                             :
                             <>
+                                {showAddNewNote &&
+                                    <Grid xs={12} md={6}>
+                                        <AddNote handleAddNote={handleAddNote} />
+                                    </Grid>
+                                }
                                 <Container>
                                     <Row>
                                         <Text h5>

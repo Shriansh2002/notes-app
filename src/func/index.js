@@ -6,12 +6,13 @@ export const deleteNote = async (id) => {
     await deleteDoc(doc(db, "Notes", id));
 };
 
-export const editNote = async (id, Newtext, currentUser, photoURL, selectedGenre,) => {
+export const editNote = async (id, Newtext, currentUser, photoURL, selectedGenre, textDescription) => {
     const myDocRef = doc(db, 'Notes', id);
     await setDoc(myDocRef, {
         id: id,
         text: Newtext.charAt(0).toUpperCase() + Newtext.slice(1),
         noteImage: photoURL,
+        noteDescription: textDescription,
         genre: selectedGenre,
         date: new Date().toLocaleDateString(),
         user: currentUser.displayName,
@@ -26,13 +27,14 @@ export const handleAddNote = async (
     currentUser,
     photoURL = 'https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80',
     selectedGenre,
-
+    textDescription
 ) => {
     let someID = nanoid();
     const newNote = {
         id: someID,
         text: text.charAt(0).toUpperCase() + text.slice(1),
         noteImage: photoURL,
+        noteDescription: textDescription,
         genre: selectedGenre,
         date: new Date().toLocaleDateString(),
         user: currentUser.displayName,

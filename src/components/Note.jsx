@@ -176,7 +176,13 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                                     Close
                                                 </Button>
                                                 <Button onPress={() => {
-                                                    handleEditNote(note.id, dataFromInput, user, fileDataFromInput, note?.genre || 'Action');
+                                                    handleEditNote(
+                                                        note.id,
+                                                        dataFromInput,
+                                                        user,
+                                                        fileDataFromInput,
+                                                        note?.genre || 'Action',
+                                                        note?.noteDescription || 'lorem10');
                                                     closeHandler();
                                                 }}
                                                     disabled={error && true}

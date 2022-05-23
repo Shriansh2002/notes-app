@@ -12,15 +12,22 @@ const genreValues = [
 
 const AddNote = ({ handleAddNote }) => {
     const [noteText, setNoteText] = useState('');
+    const [noteTextDescription, setNoteTextDescription] = useState('');
     const [fileImageURL, setFileImageURL] = useState('');
     const [genreSelected, setGenreSelected] = useState('Action');
-    const charLimit = 200;
+    const charLimit = 100;
 
     const { currentUser } = useAuth();
 
     const handleChange = (event) => {
         if (charLimit - event.target.value.length >= 0) {
             setNoteText(event.target.value);
+        }
+    };
+
+    const handleDescChange = (e) => {
+        if (500 - e.target.value.length >= 0) {
+            setNoteTextDescription(e.target.value);
         }
     };
 
@@ -31,8 +38,9 @@ const AddNote = ({ handleAddNote }) => {
     const handleSave = () => {
         if (noteText.trim().length > 0) {
             console.log(genreSelected);
-            handleAddNote(noteText, currentUser, fileImageURL, genreSelected);
+            handleAddNote(noteText, currentUser, fileImageURL, genreSelected, noteTextDescription);
             setNoteText('');
+            setNoteTextDescription('');
             setGenreSelected('');
             setFileImageURL('');
         };
@@ -47,11 +55,19 @@ const AddNote = ({ handleAddNote }) => {
             </Card.Header>
             <Divider />
             <Card.Body>
+                <Input
+                    size='md'
+                    clearable
+                    value={noteText}
+                    label="Title"
+                    onChange={handleChange}
+                />
+                <Spacer />
                 <Textarea
                     size='md'
-                    value={noteText}
-                    onChange={handleChange}
-                    label='Add Your Note Here'
+                    value={noteTextDescription}
+                    onChange={handleDescChange}
+                    label='Description'
                 />
                 <Spacer />
                 <Radio.Group
