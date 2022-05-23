@@ -10,6 +10,7 @@ import {
     Row,
     Spacer,
     Text,
+    Textarea,
     Tooltip,
     User
 } from '@nextui-org/react';
@@ -22,6 +23,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
     const [visible, setVisible] = useState(false);
     const [dataFromInput, setDataFromInput] = useState('');
     const [fileDataFromInput, setFileDataFromInput] = useState('');
+    const [descriptionDataFromInput, setDescriptionDataFromInput] = useState('');
     const [error, setError] = useState('');
 
     const user = auth.currentUser;
@@ -52,6 +54,9 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
         }
         if (fileDataFromInput.length < 1) {
             setFileDataFromInput(note.noteImage);
+        }
+        if (descriptionDataFromInput.length < 1) {
+            setDescriptionDataFromInput(note.noteDescription);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -157,9 +162,20 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                             color="primary"
                                             size="lg"
                                             label="Edit Note Image"
-                                            placeholder={!note.noteImage ? '<No Existing Image>' : note.noteImage}
+                                            placeholder={note.noteImage || '<No Existing Image>'}
                                             required
                                             onChange={getFileDataFromInput}
+                                        />
+                                        <Textarea
+                                            clearable
+                                            bordered
+                                            fullWidth
+                                            color="primary"
+                                            size="lg"
+                                            placeholder={note.noteDescription || '<No Exisiting Description>'}
+                                            label="Edit Note Description"
+                                            required
+                                            onChange={(e) => setDescriptionDataFromInput(e.target.value)}
                                         />
                                     </Modal.Body>
                                     <Modal.Footer>
@@ -182,7 +198,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                                         user,
                                                         fileDataFromInput,
                                                         note?.genre || 'Action',
-                                                        note?.noteDescription || 'lorem10');
+                                                        descriptionDataFromInput);
                                                     closeHandler();
                                                 }}
                                                     disabled={error && true}

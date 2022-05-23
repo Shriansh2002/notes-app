@@ -12,21 +12,27 @@ const genreValues = [
 
 const AddNote = ({ handleAddNote }) => {
     const [noteText, setNoteText] = useState('');
+    const [error, setError] = useState('');
     const [noteTextDescription, setNoteTextDescription] = useState('');
     const [fileImageURL, setFileImageURL] = useState('');
     const [genreSelected, setGenreSelected] = useState('Action');
     const charLimit = 100;
+    const descCharLimit = 500;
 
     const { currentUser } = useAuth();
 
     const handleChange = (event) => {
         if (charLimit - event.target.value.length >= 0) {
             setNoteText(event.target.value);
+            setError('');
+        }
+        else {
+            setError(`${charLimit} Char Allowed`);
         }
     };
 
     const handleDescChange = (e) => {
-        if (500 - e.target.value.length >= 0) {
+        if (descCharLimit - e.target.value.length >= 0) {
             setNoteTextDescription(e.target.value);
         }
     };
@@ -43,6 +49,7 @@ const AddNote = ({ handleAddNote }) => {
             setNoteTextDescription('');
             setGenreSelected('');
             setFileImageURL('');
+            setError('');
         };
     };
 
@@ -61,6 +68,7 @@ const AddNote = ({ handleAddNote }) => {
                     value={noteText}
                     label="Title"
                     onChange={handleChange}
+                    placeholder='Title For Blog'
                 />
                 <Spacer />
                 <Textarea
@@ -68,6 +76,7 @@ const AddNote = ({ handleAddNote }) => {
                     value={noteTextDescription}
                     onChange={handleDescChange}
                     label='Description'
+                    placeholder='Enter Description for blog'
                 />
                 <Spacer />
                 <Radio.Group
@@ -98,10 +107,22 @@ const AddNote = ({ handleAddNote }) => {
             <Divider />
             <Card.Footer>
                 <Row justify="flex-end">
+                    {error &&
+                        <Text color='error' css={{ background: 'white', borderRadius: '10px', p: '$1' }}>
+                            {error}
+                        </Text>}
                     <Button size="sm" light css={{ color: 'white' }}>
-                        {charLimit - noteText.length}  Remaining
+                        {descCharLimit - noteTextDescription.length}  Remaining
                     </Button>
-                    <Button size="sm" color='success' auto ghost onClick={handleSave}>Save</Button>
+                    <Button
+                        size="sm"
+                        color={noteText.length > 0 && 'success'}
+                        auto
+                        ghost
+                        onClick={handleSave}
+                        disabled={noteText.length === 0}
+                    >
+                        Save</Button>
                 </Row>
             </Card.Footer>
         </Card >
