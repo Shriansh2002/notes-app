@@ -82,20 +82,9 @@ const Notepage = () => {
                                         <Text>Updated On: {noteInfo[0].date}</Text>
 
                                         <Spacer />
-                                        <Text>
-                                            {noteInfo[0]?.noteDescription && noteInfo[0].noteDescription}
-                                        </Text>
+                                        <Text>{noteInfo[0]?.noteDescription && noteInfo[0].noteDescription}</Text>
+                                        {/* To Add ReadMore...  */}
 
-
-                                        <Grid>
-                                            <Spacer />
-                                            <Text h3>GAME MODES</Text>
-                                            <ul>
-                                                <li>Career Mode</li>
-                                                <li> VOLTA FOOTBALL </li>
-                                                <li>FIFA Ultimate Team</li>
-                                            </ul>
-                                        </Grid>
                                     </Container>
                                 </>
                             ) : (
