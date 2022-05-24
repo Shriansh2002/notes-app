@@ -59,8 +59,18 @@ const Notepage = () => {
                                             <Text color="primary">
                                                 By:&nbsp;{noteInfo[0].userEmail}
                                             </Text>
+
                                         </Container>
                                     </Row>
+                                    <Text blockquote size={12} css={{
+                                        width: 'fit-content',
+                                        margin: 'auto',
+                                        textAlign: 'center',
+                                        background: '$primaryLightActive',
+                                        fontWeight: '$bold'
+                                    }}>
+                                        {noteInfo[0]?.genre || 'ActionTemasdsadsp'}</Text>
+                                    <Spacer />
                                     <Image
                                         src={noteInfo[0].noteImage}
                                         alt="Default Image"
@@ -80,7 +90,6 @@ const Notepage = () => {
                                         }}
                                     >
                                         <Text>Updated On: {noteInfo[0].date}</Text>
-
                                         <Spacer />
                                         <Text>{noteInfo[0]?.noteDescription && noteInfo[0].noteDescription}</Text>
                                         {/* To Add ReadMore...  */}
