@@ -50,9 +50,11 @@ const NotesList = ({ loading,
                                 }
                                 <Container>
                                     <Row>
-                                        <Text h5>
-                                            Your {process.env.REACT_APP_APPLICATION_NAME}
-                                        </Text>
+                                        {notes[0]?.userEmail === currentUser.email
+                                            && <Text h5>
+                                                Your {process.env.REACT_APP_APPLICATION_NAME}
+                                            </Text>
+                                        }
                                     </Row>
                                 </Container>
                                 {notes?.length === 0 ?

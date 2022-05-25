@@ -30,7 +30,7 @@ const Notepage = () => {
 
     return (
         <Container fluid>
-            <Header title="Blog Info" />
+            <Header />
 
             <Grid.Container>
                 <Container>
@@ -38,7 +38,7 @@ const Notepage = () => {
                         <Loading size="xs" />
                     ) : (
                         <>
-                            {noteInfo.length > 0 ? (
+                            {noteInfo?.length > 0 ? (
                                 <>
                                     <Row>
                                         <Container
@@ -63,6 +63,7 @@ const Notepage = () => {
 
                                         </Container>
                                     </Row>
+                                    <Spacer />
                                     <Text blockquote size={12} css={{
                                         width: 'fit-content',
                                         margin: 'auto',
@@ -100,9 +101,14 @@ const Notepage = () => {
                                                     : <>{noteInfo[0].noteDescription}</>
                                                 }
 
-                                                <Text color='#cecece' onClick={() => setShowLess(!showLess)}>Show &nbsp;
-                                                    {showLess === true ? <>More</> : <>Less</>}
-                                                </Text>
+                                                {noteInfo[0].noteDescription.length > 100 &&
+
+                                                    <Text color='#cecece' onClick={() => setShowLess(!showLess)}>
+                                                        Show &nbsp;
+                                                        {showLess === true ? <>More</> : <>Less</>}
+                                                    </Text>
+
+                                                }
                                             </>
                                         }
 

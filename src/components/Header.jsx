@@ -2,7 +2,7 @@ import { Avatar, Button, Container, Grid, Row, Text, Tooltip, Link } from '@next
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const Header = ({ title, primaryFunction = 'home' }) => {
+const Header = ({ primaryFunction = 'home' }) => {
     const { loginWithGoogle, currentUser, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const Header = ({ title, primaryFunction = 'home' }) => {
             <Grid>
                 <Container>
                     <Link href="/" css={{ color: 'black' }}>
-                        <h2>{title} </h2>
+                        <h2>HOME</h2>
                     </Link>
                 </Container>
             </Grid>

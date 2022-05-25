@@ -27,7 +27,7 @@ const ProfilePage = () => {
 
     return (
         <Container fluid>
-            <Header title='Profile' />
+            <Header />
 
             <Grid.Container>
                 <Container>

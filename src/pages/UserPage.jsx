@@ -39,7 +39,7 @@ const UserPage = () => {
     return (
         <>
             <Container fluid>
-                <Header title='User Profile' />
+                <Header />
 
                 <Grid.Container>
                     <Container>
