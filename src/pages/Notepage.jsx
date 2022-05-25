@@ -16,6 +16,7 @@ import db from '../firebaseConfig';
 const Notepage = () => {
     const { noteID } = useParams();
     const [loading, setLoading] = useState(true);
+    const [showLess, setShowLess] = useState(true);
     const [noteInfo, setNoteInfo] = useState([]);
 
     useEffect(() => {
@@ -91,8 +92,19 @@ const Notepage = () => {
                                     >
                                         <Text>Updated On: {noteInfo[0].date}</Text>
                                         <Spacer />
-                                        <Text>{noteInfo[0]?.noteDescription && noteInfo[0].noteDescription}</Text>
-                                        {/* To Add ReadMore...  */}
+
+                                        {noteInfo[0].noteDescription &&
+                                            <>
+                                                {showLess
+                                                    ? <>{noteInfo[0].noteDescription.slice(0, 100)}</>
+                                                    : <>{noteInfo[0].noteDescription}</>
+                                                }
+
+                                                <Text color='#cecece' onClick={() => setShowLess(!showLess)}>Show &nbsp;
+                                                    {showLess === true ? <>More</> : <>Less</>}
+                                                </Text>
+                                            </>
+                                        }
 
                                     </Container>
                                 </>
@@ -112,8 +124,8 @@ const Notepage = () => {
                         </>
                     )}
                 </Container>
-            </Grid.Container>
-        </Container>
+            </Grid.Container >
+        </Container >
     );
 };
 
