@@ -62,7 +62,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
     }, []);
 
     return (
-        <Card cover css={{ w: "100%", p: '0' }}>
+        <Card cover css={{ w: "100%", p: '0' }} hoverable clickable>
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                 <Col css={{ wordWrap: 'break-word' }}>
                     <Text size={12} weight="bold" transform="uppercase" color="$red600"

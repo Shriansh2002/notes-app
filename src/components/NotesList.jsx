@@ -9,7 +9,7 @@ import {
 } from '@nextui-org/react';
 import { useAuth } from '../context/AuthContext';
 import Search from './Search';
-
+import { MdFilterList } from 'react-icons/md';
 
 const NotesList = ({ loading,
     notes,
@@ -48,15 +48,23 @@ const NotesList = ({ loading,
                                         <AddNote handleAddNote={handleAddNote} />
                                     </Grid>
                                 }
-                                <Container>
-                                    <Row>
-                                        {notes[0]?.userEmail === currentUser.email
-                                            && <Text h5>
-                                                Your {process.env.REACT_APP_APPLICATION_NAME}
-                                            </Text>
-                                        }
-                                    </Row>
-                                </Container>
+                                <Grid.Container justify='space-between'>
+                                    <Grid>
+                                        <Container>
+                                            <Row>
+                                                {notes[0]?.userEmail === currentUser.email
+                                                    && <Text h5>
+                                                        Your {process.env.REACT_APP_APPLICATION_NAME}
+                                                    </Text>
+                                                }
+                                            </Row>
+                                        </Container>
+                                    </Grid>
+
+                                    <MdFilterList color='#4079ff' />
+                                    {/* TODO: Add Filter */}
+
+                                </Grid.Container>
                                 {notes?.length === 0 ?
                                     <>
                                         {userPresence &&

@@ -2,6 +2,7 @@ import {
     Container,
     Grid,
     Image,
+    Link,
     Loading,
     Row,
     Spacer,
@@ -57,9 +58,11 @@ const Notepage = () => {
                                                 {noteInfo[0].text}
                                             </Text>
 
-                                            <Text color="primary">
-                                                By:&nbsp;{noteInfo[0].userEmail}
-                                            </Text>
+                                            <Link href={`/u/${noteInfo[0].userEmail}`}>
+                                                <Text color="primary">
+                                                    By:&nbsp;{noteInfo[0].userEmail}
+                                                </Text>
+                                            </Link>
 
                                         </Container>
                                     </Row>
@@ -91,7 +94,11 @@ const Notepage = () => {
                                             textAlign: 'center',
                                         }}
                                     >
-                                        <Text>Updated On: {noteInfo[0].date}</Text>
+                                        <Text color='#939393'>
+                                            Updated On: &nbsp;
+                                            <b>{noteInfo[0].date}</b>
+                                        </Text>
+
                                         <Spacer />
 
                                         {noteInfo[0].noteDescription &&
