@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 // Firebase 🔥
 import db, { auth } from '../firebaseConfig';
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { Container } from '@nextui-org/react';
 import { deleteNote, editNote } from '../func/index';
 
@@ -13,7 +13,7 @@ import NotesList from '../components/NotesList';
 
 const Homepage = () => {
     const [notes, setNotes] = useState([]);
-    const [filterAv, setFilterAv] = useState(false);
+    const [filterAv, setFilterAv] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [loading, setLoading] = useState(true);
     const user = auth.currentUser;
@@ -22,21 +22,23 @@ const Homepage = () => {
     // console.log(auth.currentUser.email);
 
     useEffect(() => {
-        if (!filterAv) {
-            const q = query(collection(db, 'Notes'), orderBy("text"));
+        const refValue = collection(db, 'Notes');
+
+        if (filterAv.length === 0) {
+            const q = query(refValue, orderBy("text"));
             onSnapshot(q, (snapshot) => {
                 setNotes(snapshot.docs.map((doc) => doc.data()));
                 setLoading(false);
             });
         }
         else {
-            // const q = query(collection(db, 'Notes'), orderBy("text"));
-            // onSnapshot(q, (snapshot) => {
-            //     setNotes(snapshot.docs.map((doc) => doc.data()));
-            //     setLoading(false);
-            // });
-            console.log('not able to opt to fetch notes');
-            setNotes([]);
+            console.log(filterAv);
+
+            const q = query(refValue, where('genre', 'in', filterAv), orderBy("text"));
+            onSnapshot(q, (snapshot) => {
+                setNotes(snapshot.docs.map((doc) => doc.data()));
+                setLoading(false);
+            });
         }
     }, [filterAv]);
 

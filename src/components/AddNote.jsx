@@ -119,7 +119,7 @@ const AddNote = ({ handleAddNote }) => {
                         color={noteText.length > 0 && 'success'}
                         auto
                         ghost
-                        onClick={handleSave}
+                        onPress={handleSave}
                         disabled={noteText.length === 0}
                     >
                         Save</Button>

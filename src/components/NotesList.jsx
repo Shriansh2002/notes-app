@@ -42,7 +42,6 @@ const NotesList = ({ loading,
 
     const closeHandler = () => {
         setVisible(false);
-        console.log("closed");
     };
 
     return (
@@ -118,10 +117,16 @@ const NotesList = ({ loading,
 
                                         </Modal.Body>
                                         <Modal.Footer>
-                                            <Button auto flat color="error" onClick={closeHandler}>
+                                            <Button auto flat color="error" onPress={closeHandler}>
                                                 Close
                                             </Button>
-                                            <Button auto onClick={() => { setFilterAv(true); closeHandler(); }}>
+                                            <Button auto onPress={() => {
+                                                if (selected.length > 0) {
+                                                    setFilterAv(selected.map((sel) => sel));
+                                                }
+                                                // todo: setError("atleast add One filter")
+                                                closeHandler();
+                                            }}>
                                                 Apply
                                             </Button>
                                         </Modal.Footer>
