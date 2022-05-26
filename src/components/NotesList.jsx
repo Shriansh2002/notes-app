@@ -15,6 +15,14 @@ import { useAuth } from '../context/AuthContext';
 import Search from './Search';
 import { MdFilterList } from 'react-icons/md';
 
+const genreValues = [
+    'Action',
+    'Adventure',
+    'Puzzle',
+    'Racing',
+    'Sports'
+];
+
 const NotesList = ({ loading,
     notes,
     handleAddNote,
@@ -74,7 +82,12 @@ const NotesList = ({ loading,
                                         </Container>
                                     </Grid>
 
-                                    <MdFilterList color='#4079ff' onClick={handler} cursor='pointer' />
+                                    <Grid>
+                                        <Container>
+                                            <MdFilterList onClick={handler} size={20} cursor='pointer' />
+                                        </Container>
+                                    </Grid>
+
 
                                     <Modal
                                         closeButton
@@ -95,9 +108,9 @@ const NotesList = ({ loading,
                                                     value={selected}
                                                     onChange={setSelected}
                                                 >
-                                                    <Checkbox value="buenos aires">Buenos Aires</Checkbox>
-                                                    <Checkbox value="auckland">Auckland</Checkbox>
-                                                    <Checkbox value="sydney">Sydney</Checkbox>
+                                                    {genreValues.map((genItem, index) => (
+                                                        <Checkbox value={genItem} key={genItem + index}>{genItem}</Checkbox>
+                                                    ))}
                                                 </Checkbox.Group>
                                             </Row>
                                             <Text>You're going to see: {selected.join(', ')}</Text>
