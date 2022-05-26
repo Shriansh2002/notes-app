@@ -32,7 +32,8 @@ const NotesList = ({ loading,
     setSearchText,
     showSearch,
     showAddNewNote,
-    userPresence = true }) => {
+    userPresence = true,
+    setFilterAv }) => {
 
     const { currentUser } = useAuth();
     const [visible, setVisible] = useState(false);
@@ -120,7 +121,7 @@ const NotesList = ({ loading,
                                             <Button auto flat color="error" onClick={closeHandler}>
                                                 Close
                                             </Button>
-                                            <Button auto onClick={closeHandler}>
+                                            <Button auto onClick={() => { setFilterAv(true); closeHandler(); }}>
                                                 Apply
                                             </Button>
                                         </Modal.Footer>

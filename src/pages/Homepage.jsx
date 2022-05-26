@@ -13,6 +13,7 @@ import NotesList from '../components/NotesList';
 
 const Homepage = () => {
     const [notes, setNotes] = useState([]);
+    const [filterAv, setFilterAv] = useState(false);
     const [searchText, setSearchText] = useState('');
     const [loading, setLoading] = useState(true);
     const user = auth.currentUser;
@@ -21,12 +22,24 @@ const Homepage = () => {
     // console.log(auth.currentUser.email);
 
     useEffect(() => {
-        const q = query(collection(db, 'Notes'), orderBy("text"));
-        onSnapshot(q, (snapshot) => {
-            setNotes(snapshot.docs.map((doc) => doc.data()));
-            setLoading(false);
-        });
-    }, []);
+        if (!filterAv) {
+            const q = query(collection(db, 'Notes'), orderBy("text"));
+            onSnapshot(q, (snapshot) => {
+                setNotes(snapshot.docs.map((doc) => doc.data()));
+                setLoading(false);
+            });
+        }
+        else {
+            // const q = query(collection(db, 'Notes'), orderBy("text"));
+            // onSnapshot(q, (snapshot) => {
+            //     setNotes(snapshot.docs.map((doc) => doc.data()));
+            //     setLoading(false);
+            // });
+            console.log('not able to opt to fetch notes');
+            setNotes([]);
+        }
+    }, [filterAv]);
+
     return (
         <Container fluid>
             <Header primaryFunction='profile' />
@@ -41,6 +54,7 @@ const Homepage = () => {
                 user={user}
                 handleDeleteNote={deleteNote}
                 handleEditNote={editNote}
+                setFilterAv={setFilterAv}
             />
         </Container>
     );
