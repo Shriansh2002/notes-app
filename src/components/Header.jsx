@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, Grid, Row, Text, Tooltip, Link } from '@nextui-org/react';
+import { Avatar, Button, Container, Grid, Row, Tooltip, Link } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -27,7 +27,8 @@ const Header = ({ primaryFunction = 'home' }) => {
 
             <Grid css={{ marginTop: 'auto', marginBottom: 'auto' }}>
                 {currentUser ?
-                    <Tooltip placement='bottom'
+                    <Tooltip placement='bottomEnd'
+                        hideArrow
                         content={
                             <Grid.Container>
                                 <Row>
@@ -69,18 +70,7 @@ const Header = ({ primaryFunction = 'home' }) => {
                     >
                         <>
                             <Grid.Container>
-                                <Grid css={{ marginTop: 'auto', marginBottom: 'auto', textAlign: 'center' }}>
-                                    <Container>
-                                        <Text css={{
-                                            textGradient: "45deg, $purple600 -20%, $pink600 100%",
-                                            cursor: 'pointer',
-                                        }}>
-                                            {currentUser.displayName}
-                                        </Text>
-                                    </Container>
-                                </Grid>
                                 <Grid>
-
                                     <Avatar
                                         pointer
                                         src={currentUser?.photoURL}

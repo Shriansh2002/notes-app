@@ -9,7 +9,8 @@ import {
     Grid,
     Loading,
     Row,
-    Text
+    Text,
+    Spacer
 } from '@nextui-org/react';
 import { useAuth } from '../context/AuthContext';
 import Search from './Search';
@@ -86,7 +87,7 @@ const NotesList = ({ loading,
                                     <Grid>
                                         <Grid.Container>
                                             {filterAv &&
-                                                <>
+                                                <Container>
                                                     Showing Results for&nbsp;
                                                     <>
                                                         {(filterAv.length === genreValues.length) || (filterAv.length === 0)
@@ -95,11 +96,10 @@ const NotesList = ({ loading,
                                                         }
                                                         &nbsp;
                                                     </>
-                                                </>
-
+                                                    <MdFilterList onClick={handler} size={20} cursor='pointer' />
+                                                    <Spacer  />
+                                                </Container>
                                             }
-
-                                            <MdFilterList onClick={handler} size={20} cursor='pointer' />
                                         </Grid.Container>
                                     </Grid>
 
