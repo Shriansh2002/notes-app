@@ -97,7 +97,7 @@ const NotesList = ({ loading,
                                                         &nbsp;
                                                     </>
                                                     <MdFilterList onClick={handler} size={20} cursor='pointer' />
-                                                    <Spacer  />
+                                                    <Spacer />
                                                 </Container>
                                             }
                                         </Grid.Container>
@@ -112,14 +112,14 @@ const NotesList = ({ loading,
                                         onClose={closeHandler}
                                     >
                                         <Modal.Header>
-                                            <Text id="modal-title" size={18}>
+                                            <Text id="modal-title" size={18} b>
                                                 Apply Filter
                                             </Text>
                                         </Modal.Header>
                                         <Modal.Body>
                                             <Row justify="space-between">
                                                 <Checkbox.Group
-                                                    label="Select cities"
+                                                    label="Select Genre"
                                                     value={selected}
                                                     onChange={setSelected}
                                                 >
