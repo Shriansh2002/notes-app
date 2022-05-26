@@ -56,6 +56,7 @@ const Homepage = () => {
                 user={user}
                 handleDeleteNote={deleteNote}
                 handleEditNote={editNote}
+                filterAv={filterAv}
                 setFilterAv={setFilterAv}
             />
         </Container>

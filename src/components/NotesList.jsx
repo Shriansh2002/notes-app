@@ -33,6 +33,7 @@ const NotesList = ({ loading,
     showSearch,
     showAddNewNote,
     userPresence = true,
+    filterAv,
     setFilterAv }) => {
 
     const { currentUser } = useAuth();
@@ -83,9 +84,23 @@ const NotesList = ({ loading,
                                     </Grid>
 
                                     <Grid>
-                                        <Container>
+                                        <Grid.Container>
+                                            {filterAv &&
+                                                <>
+                                                    Showing Results for&nbsp;
+                                                    <>
+                                                        {(filterAv.length === genreValues.length) || (filterAv.length === 0)
+                                                            ? <Text b>All</Text>
+                                                            : <Text b>{filterAv.join(', ')}</Text>
+                                                        }
+                                                        &nbsp;
+                                                    </>
+                                                </>
+
+                                            }
+
                                             <MdFilterList onClick={handler} size={20} cursor='pointer' />
-                                        </Container>
+                                        </Grid.Container>
                                     </Grid>
 
 
@@ -123,6 +138,9 @@ const NotesList = ({ loading,
                                             <Button auto onPress={() => {
                                                 if (selected.length > 0) {
                                                     setFilterAv(selected.map((sel) => sel));
+                                                }
+                                                else if (selected.length === 0) {
+                                                    setFilterAv([]);
                                                 }
                                                 // todo: setError("atleast add One filter")
                                                 closeHandler();
