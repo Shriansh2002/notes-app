@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import Note from './Note';
 import AddNote from './AddNote';
 import {
+    Button,
+    Checkbox,
+    Modal,
     Container,
     Grid,
     Loading,
@@ -21,7 +25,16 @@ const NotesList = ({ loading,
     showSearch,
     showAddNewNote,
     userPresence = true }) => {
+
     const { currentUser } = useAuth();
+    const [visible, setVisible] = useState(false);
+    const [selected, setSelected] = useState([]);
+    const handler = () => setVisible(true);
+
+    const closeHandler = () => {
+        setVisible(false);
+        console.log("closed");
+    };
 
     return (
         <>
@@ -61,8 +74,44 @@ const NotesList = ({ loading,
                                         </Container>
                                     </Grid>
 
-                                    <MdFilterList color='#4079ff' />
-                                    {/* TODO: Add Filter */}
+                                    <MdFilterList color='#4079ff' onClick={handler} cursor='pointer' />
+
+                                    <Modal
+                                        closeButton
+                                        animated={false}
+                                        aria-labelledby="modal-title"
+                                        open={visible}
+                                        onClose={closeHandler}
+                                    >
+                                        <Modal.Header>
+                                            <Text id="modal-title" size={18}>
+                                                Apply Filter
+                                            </Text>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <Row justify="space-between">
+                                                <Checkbox.Group
+                                                    label="Select cities"
+                                                    value={selected}
+                                                    onChange={setSelected}
+                                                >
+                                                    <Checkbox value="buenos aires">Buenos Aires</Checkbox>
+                                                    <Checkbox value="auckland">Auckland</Checkbox>
+                                                    <Checkbox value="sydney">Sydney</Checkbox>
+                                                </Checkbox.Group>
+                                            </Row>
+                                            <Text>You're going to see: {selected.join(', ')}</Text>
+
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button auto flat color="error" onClick={closeHandler}>
+                                                Close
+                                            </Button>
+                                            <Button auto onClick={closeHandler}>
+                                                Apply
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Modal>
 
                                 </Grid.Container>
                                 {notes?.length === 0 ?
