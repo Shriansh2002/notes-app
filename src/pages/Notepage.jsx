@@ -110,7 +110,7 @@ const Notepage = () => {
 
                                                 {noteInfo[0].noteDescription.length > 100 &&
 
-                                                    <Text color='#cecece' onPress={() => setShowLess(!showLess)}>
+                                                    <Text color='#cecece' onClick={() => setShowLess(!showLess)}>
                                                         Show &nbsp;
                                                         {showLess === true ? <>More</> : <>Less</>}
                                                     </Text>

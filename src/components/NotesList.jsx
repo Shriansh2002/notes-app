@@ -142,7 +142,6 @@ const NotesList = ({ loading,
                                                 else if (selected.length === 0) {
                                                     setFilterAv([]);
                                                 }
-                                                // todo: setError("atleast add One filter")
                                                 closeHandler();
                                             }}>
                                                 Apply
