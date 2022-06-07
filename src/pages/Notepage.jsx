@@ -24,6 +24,10 @@ const Notepage = () => {
     const [loading, setLoading] = useState(true);
     const [showLess, setShowLess] = useState(true);
     const [noteInfo, setNoteInfo] = useState([]);
+    const messageContent =
+        `Check Out This Blog Published on React-Notes-Shriansh Website ⬇️
+        
+${window.location.href}`;
 
     useEffect(() => {
         const q = query(collection(db, 'Notes'), where('id', '==', noteID));
@@ -112,7 +116,7 @@ const Notepage = () => {
                                             </Popover>
 
                                             <a
-                                                href={`https://wa.me/send?text=${window.location.href}`}
+                                                href={`https://wa.me/send?text=${messageContent}`}
                                                 data-action="share/whatsapp/share"
                                             >
                                                 <IoLogoWhatsapp
@@ -129,10 +133,12 @@ const Notepage = () => {
                                         src={noteInfo[0].noteImage}
                                         alt="Default Image"
                                         css={{
+                                            objectFit: 'cover',
                                             margin: 'none',
                                             marginTop: '$0',
                                             borderRadius: '$lg',
                                             width: '100vw',
+                                            height: 'auto'
                                         }}
                                     />
 
