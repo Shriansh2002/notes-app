@@ -4,6 +4,7 @@ import {
     Image,
     Link,
     Loading,
+    Popover,
     Row,
     Spacer,
     Text,
@@ -16,6 +17,7 @@ import db from '../firebaseConfig';
 
 import { FiShare } from 'react-icons/fi';
 import { IoLogoWhatsapp } from 'react-icons/io';
+import copy from 'copy-to-clipboard';
 
 const Notepage = () => {
     const { noteID } = useParams();
@@ -91,11 +93,32 @@ const Notepage = () => {
                                             maxWidth: '140px',
                                             textAlign: 'center',
                                             alignContent: 'space-between',
-                                            justifyContent: 'space-between'
+                                            justifyContent: 'space-between',
                                         }}>
-                                            <FiShare size={20} />
-                                            <IoLogoWhatsapp color='green' size={20} />
-                                            {console.log(window.location.href)}
+
+                                            <Popover>
+                                                <Popover.Trigger>
+                                                    <div>
+                                                        <FiShare
+                                                            size={20}
+                                                            cursor='pointer'
+                                                            onClick={() => copy(window.location.href)}
+                                                        />
+                                                    </div>
+                                                </Popover.Trigger>
+                                                <Popover.Content>
+                                                    <Text css={{ p: '$4' }}>URL Copied to Clipboard 📋 </Text>
+                                                </Popover.Content>
+                                            </Popover>
+
+
+                                            <IoLogoWhatsapp
+                                                color='green'
+                                                size={20}
+                                                cursor='pointer'
+                                                onClick={() => { }}
+                                            />
+
                                         </Container>
                                     </Row>
                                     <Spacer />
