@@ -14,6 +14,9 @@ import Header from '../components/Header';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import db from '../firebaseConfig';
 
+import { FiShare } from 'react-icons/fi';
+import { IoLogoWhatsapp } from 'react-icons/io';
+
 const Notepage = () => {
     const { noteID } = useParams();
     const [loading, setLoading] = useState(true);
@@ -67,14 +70,30 @@ const Notepage = () => {
                                         </Container>
                                     </Row>
                                     <Spacer />
-                                    <Text blockquote size={12} css={{
-                                        width: 'fit-content',
-                                        margin: 'auto',
-                                        textAlign: 'center',
-                                        background: '$primaryLightActive',
-                                        fontWeight: '$bold'
-                                    }}>
-                                        {noteInfo[0]?.genre || 'ActionTemasdsadsp'}</Text>
+                                    <Row>
+
+                                        <Text blockquote size={12} css={{
+                                            width: 'fit-content',
+                                            margin: 'auto',
+                                            textAlign: 'center',
+                                            background: '$primaryLightActive',
+                                            fontWeight: '$bold'
+                                        }}>
+                                            {noteInfo[0]?.genre || 'ActionTemasdsadsp'}
+                                        </Text>
+
+                                        <div style={{
+                                            width: '50px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                        }}>
+                                            <FiShare size={20} />
+                                            <IoLogoWhatsapp color='green' size={20} />
+                                            {console.log(window.location.href)}
+                                        </div>
+
+                                    </Row>
                                     <Spacer />
                                     <Image
                                         src={noteInfo[0].noteImage}
