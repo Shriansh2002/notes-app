@@ -81,18 +81,22 @@ const Notepage = () => {
                                         }}>
                                             {noteInfo[0]?.genre || 'ActionTemasdsadsp'}
                                         </Text>
+                                    </Row>
+                                    <Spacer />
 
-                                        <div style={{
-                                            width: '50px',
+                                    <Row>
+                                        <Container css={{
                                             display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'space-between',
+                                            margin: 'auto',
+                                            maxWidth: '140px',
+                                            textAlign: 'center',
+                                            alignContent: 'space-between',
+                                            justifyContent: 'space-between'
                                         }}>
                                             <FiShare size={20} />
                                             <IoLogoWhatsapp color='green' size={20} />
                                             {console.log(window.location.href)}
-                                        </div>
-
+                                        </Container>
                                     </Row>
                                     <Spacer />
                                     <Image
@@ -102,7 +106,6 @@ const Notepage = () => {
                                             margin: 'none',
                                             marginTop: '$0',
                                             borderRadius: '$lg',
-                                            height: '50vh',
                                             width: '100vw',
                                         }}
                                     />
