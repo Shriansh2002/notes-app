@@ -15,7 +15,7 @@ import Header from '../components/Header';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import db from '../firebaseConfig';
 
-import { FiShare } from 'react-icons/fi';
+import { AiOutlineLink } from 'react-icons/ai';
 import { IoLogoWhatsapp } from 'react-icons/io';
 import copy from 'copy-to-clipboard';
 
@@ -103,7 +103,7 @@ ${window.location.href}`;
                                             <Popover>
                                                 <Popover.Trigger>
                                                     <div>
-                                                        <FiShare
+                                                        <AiOutlineLink
                                                             size={20}
                                                             cursor='pointer'
                                                             onClick={() => copy(window.location.href)}
