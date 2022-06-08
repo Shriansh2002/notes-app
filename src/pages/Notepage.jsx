@@ -126,17 +126,6 @@ ${window.location.href}`;
                                                     onClick={() => { }}
                                                 />
                                             </a>
-                                            <a
-                                                href={`whatsapp://send?text=${messageContent}`}
-                                                data-action="share/whatsapp/share"
-                                            >
-                                                <IoLogoWhatsapp
-                                                    color='green'
-                                                    size={20}
-                                                    cursor='pointer'
-                                                    onClick={() => { }}
-                                                />
-                                            </a>
                                         </Container>
                                     </Row>
                                     <Spacer />
