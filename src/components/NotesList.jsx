@@ -174,7 +174,7 @@ const NotesList = ({ loading,
                                         </Grid.Container>
 
                                         {notes?.map((note, index) => (
-                                            <Grid xs={12} md={4}
+                                            <Grid xs={12} md={4} sm={6}
                                                 key={note + index}>
                                                 <Note
                                                     note={note}

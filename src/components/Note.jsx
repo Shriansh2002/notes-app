@@ -117,10 +117,6 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                 bordered
                                 color='gradient'
                                 name={note.user || 'anonymous'}
-                                description={note.userEmail.length < 26
-                                    ? note.userEmail
-                                    : note.userEmail.substring(0, note.userEmail.lastIndexOf("@"))
-                                }
                             />
                         </Link>
                     </Col>
