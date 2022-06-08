@@ -116,7 +116,18 @@ ${window.location.href}`;
                                             </Popover>
 
                                             <a
-                                                href={`https://wa.me/send?text=${messageContent}`}
+                                                href={`https://wa.me/?text=${messageContent}`}
+                                                data-action="share/whatsapp/share"
+                                            >
+                                                <IoLogoWhatsapp
+                                                    color='green'
+                                                    size={20}
+                                                    cursor='pointer'
+                                                    onClick={() => { }}
+                                                />
+                                            </a>
+                                            <a
+                                                href={`whatsapp://send?text=${messageContent}`}
                                                 data-action="share/whatsapp/share"
                                             >
                                                 <IoLogoWhatsapp
