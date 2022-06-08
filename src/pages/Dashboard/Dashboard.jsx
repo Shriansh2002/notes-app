@@ -1,4 +1,4 @@
-import { Table, Row, Col, Tooltip, User, Text, Container } from "@nextui-org/react";
+import { Table, Row, Col, Tooltip, User, Text, Container, Input, Spacer } from "@nextui-org/react";
 import Header from '../../components/Header';
 
 import { EyeIcon } from "./EyeIcon";
@@ -133,6 +133,13 @@ export default function Dashboard() {
     return (
         <Container fluid>
             <Header admin />
+
+            <Input
+                placeholder="Put your Keyword Here"
+                width='100%'
+                label="Search Here" />
+            <Spacer />
+
             <Table
                 aria-label="Example table with custom cells"
                 css={{
