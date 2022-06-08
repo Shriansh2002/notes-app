@@ -7,10 +7,29 @@ import Homepage from './pages/Homepage';
 import Notepage from './pages/Notepage';
 import ProfilePage from './pages/ProfilePage';
 import UserPage from './pages/UserPage.jsx';
+import Dashboard from './pages/Dashboard/Dashboard';
+
+const adminEmailAddresses = [
+  'shrianshcoding@gmail.com',
+  'shrianshpbt@gmail.com'
+];
+
 
 function PrivateRoute({ children }) {
   const { currentUser } = useAuth();
   return currentUser ? children : <Navigate to="/" />;
+}
+
+function AdminRoute({ children }) {
+  const { currentUser } = useAuth();
+
+  return adminEmailAddresses.includes(currentUser.email)
+    ? children
+    :
+    <>
+      {alert('You are Not Authenticated to Do This Work')}
+      <Navigate to="/" />
+    </>;
 }
 
 function App() {
@@ -42,6 +61,14 @@ function App() {
                 <Notepage />
               </PrivateRoute>
             } />
+
+          <Route exact path='/admin/dashboard'
+            element={
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            }
+          />
 
           <Route
             path="*"

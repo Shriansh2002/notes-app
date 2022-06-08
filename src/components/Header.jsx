@@ -2,7 +2,7 @@ import { Avatar, Button, Container, Grid, Row, Tooltip, Link } from '@nextui-org
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const Header = ({ primaryFunction = 'home' }) => {
+const Header = ({ primaryFunction = 'home', admin }) => {
     const { loginWithGoogle, currentUser, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -20,7 +20,10 @@ const Header = ({ primaryFunction = 'home' }) => {
             <Grid>
                 <Container>
                     <Link href="/" css={{ color: 'black' }}>
-                        <h2>HOME</h2>
+                        {admin ?
+                            <h2>ADMIN</h2> :
+                            <h2>HOME</h2>
+                        }
                     </Link>
                 </Container>
             </Grid>
