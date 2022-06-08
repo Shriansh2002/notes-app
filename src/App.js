@@ -44,7 +44,7 @@ function App() {
           <Route exact path='/profile'
             element={
               <PrivateRoute>
-                <ProfilePage />
+                <ProfilePage adminEmailAddresses={adminEmailAddresses} />
               </PrivateRoute>
             } />
 

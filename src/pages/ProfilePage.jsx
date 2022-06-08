@@ -8,7 +8,7 @@ import db, { auth } from '../firebaseConfig';
 
 import { deleteNote, editNote, handleAddNote } from '../func/index';
 
-const ProfilePage = () => {
+const ProfilePage = ({ adminEmailAddresses }) => {
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -39,6 +39,12 @@ const ProfilePage = () => {
                                     {currentUser.email}
                                 </Link>
                             </Text>
+                            {adminEmailAddresses.includes(currentUser.email)
+                                &&
+                                <a href='/admin/dashboard' style={{ color: 'green' }}>
+                                    <u>You are Administrator</u>
+                                </a>
+                            }
                         </Text>
                     </Row>
                 </Container>
