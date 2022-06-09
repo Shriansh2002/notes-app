@@ -56,7 +56,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
             setFileDataFromInput(note.noteImage);
         }
         if (descriptionDataFromInput.length < 1) {
-            setDescriptionDataFromInput(note.noteDescription);
+            setDescriptionDataFromInput(note.noteDescription || 'no note avail');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -194,7 +194,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                                                         user,
                                                         fileDataFromInput,
                                                         note?.genre || 'Action',
-                                                        descriptionDataFromInput);
+                                                        descriptionDataFromInput || note.noteDescription);
                                                     closeHandler();
                                                 }}
                                                     disabled={error && true}
