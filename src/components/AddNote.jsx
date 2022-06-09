@@ -54,7 +54,7 @@ const AddNote = ({ handleAddNote }) => {
     };
 
     return (
-        <Card color='gradient'>
+        <Card>
             <Card.Header>
                 <Text style={{ textAlign: 'center', color: 'white' }}>
                     Posting as <b> {currentUser.displayName} </b>

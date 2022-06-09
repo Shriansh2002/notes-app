@@ -34,12 +34,14 @@ const Header = ({ primaryFunction = 'Home', admin }) => {
                         <Dropdown.Trigger>
                             <Avatar
                                 pointer
-                                src={currentUser?.photoURL}
+                                src={currentUser.photoURL}
                                 color="gradient"
                                 bordered
                                 size='sm'
                             />
                         </Dropdown.Trigger>
+
+                        
 
                         <Dropdown.Menu color="secondary" aria-label="Avatar Actions">
                             <Dropdown.Item key="profile" css={{ height: "$18" }}>
@@ -51,8 +53,10 @@ const Header = ({ primaryFunction = 'Home', admin }) => {
                                 </Text>
                             </Dropdown.Item>
 
-                            <Dropdown.Item key='primary_function' withDivider onPress={() => { navigate(`/${primaryFunction}`); }}>
-                                {primaryFunction.toUpperCase()}
+                            <Dropdown.Item key='primary_function' withDivider>
+                                <Text onClick={() => { navigate(`/${primaryFunction}`); }}>
+                                    {primaryFunction.toUpperCase()}
+                                </Text>
                             </Dropdown.Item>
 
                             <Dropdown.Item key="logout" color="error" withDivider onPress={() => logout}>
