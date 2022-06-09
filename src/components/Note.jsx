@@ -62,7 +62,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
     }, []);
 
     return (
-        <Card cover css={{ w: "100%", p: '0' }} hoverable clickable>
+        <Card css={{ w: "100%", p: '0' }} isPressable>
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
                 <Col css={{ wordWrap: 'break-word' }}>
                     <Text size={12} weight="bold" transform="uppercase" color="$red600"
@@ -83,7 +83,7 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                     textShadow: '-1px 1px 0 #FEF9F0,1px 1px 0 #FEF9F0, 1px -1px 0 #FEF9F0, -1px -1px 0 #FEF9F0'
                 }}>{note?.genre || 'GEN#1'}</Text>
             </Card.Header>
-            <Card.Body>
+            <Card.Body css={{ p: 0 }}>
                 <Link href={`/note/${note.id}`}>
                     <Card.Image
                         showSkeleton
@@ -92,12 +92,13 @@ const Note = ({ note, handleDeleteNote, handleEditNote }) => {
                             : "https://images.unsplash.com/photo-1472289065668-ce650ac443d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80"}
                         height={400}
                         width={600}
+                        objectFit="cover"
                         alt="Blog Image"
                     />
                 </Link>
             </Card.Body>
             <Card.Footer
-                blur
+                isBlurred={true}
                 css={{
                     position: "absolute",
                     // bgBlur: "#0f1114",

@@ -1,8 +1,8 @@
-import { Avatar, Button, Container, Grid, Row, Tooltip, Link } from '@nextui-org/react';
+import { Avatar, Button, Container, Grid, Dropdown, Link, Text } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const Header = ({ primaryFunction = 'home', admin }) => {
+const Header = ({ primaryFunction = 'Home', admin }) => {
     const { loginWithGoogle, currentUser, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -30,61 +30,37 @@ const Header = ({ primaryFunction = 'home', admin }) => {
 
             <Grid css={{ marginTop: 'auto', marginBottom: 'auto' }}>
                 {currentUser ?
-                    <Tooltip placement='bottomEnd'
-                        hideArrow
-                        content={
-                            <Grid.Container>
-                                <Row>
-                                    <Button
-                                        size='md'
-                                        onPress={() => { navigate(`/${primaryFunction}`); }}
-                                        rounded
-                                        css={{
-                                            maxHeight: "$space$12",
-                                            fs: "$tiny",
-                                            fontWeight: "$semibold",
-                                            borderColor: "$primary",
-                                            color: "$white",
-                                        }}
-                                    >
-                                        {primaryFunction?.toUpperCase()}
-                                    </Button>
-                                </Row>
-                                <Row>
-                                    <Button
-                                        size='md'
-                                        rounded
-                                        onPress={logout}
-                                        css={{
-                                            marginTop: '$5',
-                                            maxHeight: "$space$12",
-                                            fs: "$tiny",
-                                            fontWeight: "$semibold",
-                                            borderColor: "$primary",
-                                            color: "$white",
-                                        }}
-                                        color="warning"
-                                    >
-                                        LOGOUT
-                                    </Button>
-                                </Row>
-                            </Grid.Container>
-                        }
-                    >
-                        <>
-                            <Grid.Container>
-                                <Grid>
-                                    <Avatar
-                                        pointer
-                                        src={currentUser?.photoURL}
-                                        color="gradient"
-                                        bordered
-                                        size='sm'
-                                    />
-                                </Grid>
-                            </Grid.Container>
-                        </>
-                    </Tooltip >
+                    <Dropdown placement="bottom-left">
+                        <Dropdown.Trigger>
+                            <Avatar
+                                pointer
+                                src={currentUser?.photoURL}
+                                color="gradient"
+                                bordered
+                                size='sm'
+                            />
+                        </Dropdown.Trigger>
+
+                        <Dropdown.Menu color="secondary" aria-label="Avatar Actions">
+                            <Dropdown.Item key="profile" css={{ height: "$18" }}>
+                                <Text b color="inherit" css={{ d: "flex" }}>
+                                    Signed in as
+                                </Text>
+                                <Text b color="inherit" css={{ d: "flex" }}>
+                                    {currentUser.email}
+                                </Text>
+                            </Dropdown.Item>
+
+                            <Dropdown.Item key='primary_function' withDivider onPress={() => { navigate(`/${primaryFunction}`); }}>
+                                {primaryFunction.toUpperCase()}
+                            </Dropdown.Item>
+
+                            <Dropdown.Item key="logout" color="error" withDivider onPress={() => logout}>
+                                Log Out
+                            </Dropdown.Item>
+
+                        </Dropdown.Menu>
+                    </Dropdown>
                     :
                     <Button onPress={signUpFunction} size='sm' bordered>
                         Login With Google
