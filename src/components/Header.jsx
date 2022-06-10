@@ -34,14 +34,14 @@ const Header = ({ primaryFunction = 'Home', admin }) => {
                         <Dropdown.Trigger>
                             <Avatar
                                 pointer
-                                src={currentUser.photoURL}
+                                src={currentUser?.photoURL}
                                 color="gradient"
                                 bordered
                                 size='sm'
                             />
                         </Dropdown.Trigger>
 
-                        
+
 
                         <Dropdown.Menu color="secondary" aria-label="Avatar Actions">
                             <Dropdown.Item key="profile" css={{ height: "$18" }}>

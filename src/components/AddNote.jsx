@@ -54,7 +54,7 @@ const AddNote = ({ handleAddNote }) => {
     };
 
     return (
-        <Card>
+        <Card variant='bordered'>
             <Card.Header>
                 <Text style={{ textAlign: 'center', color: 'white' }}>
                     Posting as <b> {currentUser.displayName} </b>
@@ -80,7 +80,7 @@ const AddNote = ({ handleAddNote }) => {
                 />
                 <Spacer />
                 <Radio.Group
-                    row
+                    orientation="horizontal"
                     value={genreSelected}
                     size='xs'
                     textColor='$white'

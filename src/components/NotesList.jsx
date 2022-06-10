@@ -67,7 +67,7 @@ const NotesList = ({ loading,
                             :
                             <>
                                 {showAddNewNote &&
-                                    <Grid xs={12} md={6}>
+                                    <Grid xs={12} md={12}>
                                         <AddNote handleAddNote={handleAddNote} />
                                     </Grid>
                                 }
@@ -75,7 +75,7 @@ const NotesList = ({ loading,
                                     <Grid>
                                         <Container>
                                             <Row>
-                                                {notes[0]?.userEmail === currentUser.email
+                                                {(notes[0]?.userEmail === currentUser.email) && showAddNewNote
                                                     && <Text h5>
                                                         Your {process.env.REACT_APP_APPLICATION_NAME}
                                                     </Text>
