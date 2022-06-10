@@ -39,12 +39,6 @@ const ProfilePage = ({ adminEmailAddresses }) => {
                                     {currentUser.email}
                                 </Link>
                             </Text>
-                            {adminEmailAddresses.includes(currentUser.email)
-                                &&
-                                <a href='/admin/dashboard' style={{ color: 'green' }}>
-                                    <u>You are Administrator</u>
-                                </a>
-                            }
                         </Text>
                     </Row>
                 </Container>

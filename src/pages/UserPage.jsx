@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import NotesList from '../components/NotesList';
 import db from '../firebaseConfig';
 
-const UserPage = () => {
+const UserPage = ({ adminEmailAddresses }) => {
     const { userID } = useParams();
 
     const [notes, setNotes] = useState([]);
@@ -39,7 +39,7 @@ const UserPage = () => {
     return (
         <>
             <Container fluid>
-                <Header />
+                <Header adminEmailAddresses={adminEmailAddresses} />
 
                 <Grid.Container>
                     <Container>

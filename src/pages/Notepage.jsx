@@ -19,7 +19,7 @@ import { AiOutlineLink } from 'react-icons/ai';
 import { IoLogoWhatsapp } from 'react-icons/io';
 import copy from 'copy-to-clipboard';
 
-const Notepage = () => {
+const Notepage = ({ adminEmailAddresses }) => {
     const { noteID } = useParams();
     const [loading, setLoading] = useState(true);
     const [showLess, setShowLess] = useState(true);
@@ -40,7 +40,7 @@ ${window.location.href}`;
 
     return (
         <Container fluid>
-            <Header />
+            <Header adminEmailAddresses={adminEmailAddresses} />
 
             <Grid.Container>
                 <Container>

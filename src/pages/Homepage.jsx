@@ -11,7 +11,7 @@ import { deleteNote, editNote } from '../func/index';
 import Header from '../components/Header';
 import NotesList from '../components/NotesList';
 
-const Homepage = () => {
+const Homepage = ({ adminEmailAddresses }) => {
     const [notes, setNotes] = useState([]);
     const [filterAv, setFilterAv] = useState([]);
     const [searchText, setSearchText] = useState('');
@@ -44,7 +44,7 @@ const Homepage = () => {
 
     return (
         <Container fluid>
-            <Header primaryFunction='profile' />
+            <Header primaryFunction='profile' adminEmailAddresses={adminEmailAddresses} />
 
             <NotesList
                 notes={notes?.filter((note) =>

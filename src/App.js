@@ -38,8 +38,8 @@ function App() {
       <AuthProvider>
 
         <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route exact path='/home' element={<Homepage />} />
+          <Route path='/' element={<Homepage adminEmailAddresses={adminEmailAddresses} />} />
+          <Route exact path='/home' element={<Homepage adminEmailAddresses={adminEmailAddresses} />} />
 
           <Route exact path='/profile'
             element={
@@ -51,14 +51,14 @@ function App() {
           <Route exact path='/u/:userID'
             element={
               <PrivateRoute>
-                <UserPage />
+                <UserPage adminEmailAddresses={adminEmailAddresses} />
               </PrivateRoute>
             } />
 
           <Route exact path='/note/:noteID'
             element={
               <PrivateRoute>
-                <Notepage />
+                <Notepage adminEmailAddresses={adminEmailAddresses} />
               </PrivateRoute>
             } />
 

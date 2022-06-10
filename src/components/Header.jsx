@@ -2,7 +2,7 @@ import { Avatar, Button, Container, Grid, Dropdown, Link, Text } from '@nextui-o
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const Header = ({ primaryFunction = 'Home', admin }) => {
+const Header = ({ primaryFunction = 'Home', admin, adminEmailAddresses }) => {
     const { loginWithGoogle, currentUser, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -58,6 +58,14 @@ const Header = ({ primaryFunction = 'Home', admin }) => {
                                     {primaryFunction.toUpperCase()}
                                 </Text>
                             </Dropdown.Item>
+
+                            {(adminEmailAddresses?.includes(currentUser?.email) || admin) &&
+                                <Dropdown.Item key='admin_dashboard'>
+                                    <Text onClick={() => { navigate(`/admin/dashboard`); }}>
+                                        Admin Dashboard
+                                    </Text>
+                                </Dropdown.Item>
+                            }
 
                             <Dropdown.Item key="logout" color="error" withDivider onPress={() => logout}>
                                 Log Out
