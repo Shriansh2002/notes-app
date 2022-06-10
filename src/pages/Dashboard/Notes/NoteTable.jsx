@@ -131,7 +131,9 @@ const renderCell = (user, columnKey) => {
 const NoteTable = () => {
     return (
         <>
+            <Text h3>Users</Text>
             <Table
+                bordered
                 aria-label="Example table with custom cells"
                 css={{
                     height: "auto",
