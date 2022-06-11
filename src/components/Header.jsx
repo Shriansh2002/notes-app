@@ -1,10 +1,20 @@
-import { Avatar, Button, Container, Grid, Dropdown, Link, Text } from '@nextui-org/react';
+import { changeTheme, useTheme, Avatar, Button, Container, Grid, Dropdown, Link, Switch, Text } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+import { SunIcon } from './icons/SunIcon';
+import { MoonIcon } from './icons/MoonIcon';
+
 const Header = ({ primaryFunction = 'Home', admin, adminEmailAddresses }) => {
     const { loginWithGoogle, currentUser, logout } = useAuth();
+    const { isDark } = useTheme();
     const navigate = useNavigate();
+
+    const handleChange = () => {
+        const nextTheme = isDark ? 'light' : 'dark';
+        window.localStorage.setItem('data-theme', nextTheme); // you can use any storage
+        changeTheme(nextTheme);
+    };
 
     const signUpFunction = async () => {
         try {
@@ -21,63 +31,78 @@ const Header = ({ primaryFunction = 'Home', admin, adminEmailAddresses }) => {
                 <Container>
                     <Link href="/" css={{ color: 'black' }}>
                         {admin ?
-                            <h2>ADMIN</h2> :
-                            <h2>HOME</h2>
+                            <Text h2>ADMIN</Text> :
+                            <Text h2>HOME</Text>
                         }
                     </Link>
                 </Container>
             </Grid>
 
             <Grid css={{ marginTop: 'auto', marginBottom: 'auto' }}>
-                {currentUser ?
-                    <Dropdown placement="bottom-left">
-                        <Dropdown.Trigger>
-                            <Avatar
-                                pointer
-                                src={currentUser?.photoURL}
-                                color="gradient"
-                                bordered
-                                size='sm'
-                            />
-                        </Dropdown.Trigger>
+                <Grid.Container>
+
+                    <Switch
+                        size='xl'
+                        onChange={handleChange}
+                        iconOn={<SunIcon filled />}
+                        iconOff={<MoonIcon filled />}
+                        style={{
+                            marginRight: '10px'
+                        }}
+                    />
+
+                    {currentUser ?
+                        <Dropdown placement="bottom-left">
+                            <Dropdown.Trigger>
+                                <Avatar
+                                    pointer
+                                    src={currentUser?.photoURL}
+                                    color="gradient"
+                                    bordered
+                                    size='sm'
+                                />
+                            </Dropdown.Trigger>
 
 
 
-                        <Dropdown.Menu color="secondary" aria-label="Avatar Actions">
-                            <Dropdown.Item key="profile" css={{ height: "$18" }}>
-                                <Text b color="inherit" css={{ d: "flex" }}>
-                                    Signed in as
-                                </Text>
-                                <Text b color="inherit" css={{ d: "flex" }}>
-                                    {currentUser.email}
-                                </Text>
-                            </Dropdown.Item>
-
-                            <Dropdown.Item key='primary_function' withDivider>
-                                <Text onClick={() => { navigate(`/${primaryFunction}`); }}>
-                                    {primaryFunction.toUpperCase()}
-                                </Text>
-                            </Dropdown.Item>
-
-                            {(adminEmailAddresses?.includes(currentUser?.email) || admin) &&
-                                <Dropdown.Item key='admin_dashboard'>
-                                    <Text onClick={() => { navigate(`/admin/dashboard`); }}>
-                                        Admin Dashboard
+                            <Dropdown.Menu color="secondary" aria-label="Avatar Actions">
+                                <Dropdown.Item key="profile" css={{ height: "$18" }}>
+                                    <Text b color="inherit" css={{ d: "flex" }}>
+                                        Signed in as
+                                    </Text>
+                                    <Text b color="inherit" css={{ d: "flex" }}>
+                                        {currentUser.email}
                                     </Text>
                                 </Dropdown.Item>
-                            }
 
-                            <Dropdown.Item key="logout" color="error" withDivider onPress={() => logout}>
-                                Log Out
-                            </Dropdown.Item>
+                                <Dropdown.Item key='primary_function' withDivider>
+                                    <Text onClick={() => { navigate(`/${primaryFunction}`); }}>
+                                        {primaryFunction.toUpperCase()}
+                                    </Text>
+                                </Dropdown.Item>
 
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    :
-                    <Button onPress={signUpFunction} size='sm' bordered>
-                        Login With Google
-                    </Button>
-                }
+                                {(adminEmailAddresses?.includes(currentUser?.email) || admin) &&
+                                    <Dropdown.Item key='admin_dashboard'>
+                                        <Text onClick={() => { navigate(`/admin/dashboard`); }}>
+                                            Admin Dashboard
+                                        </Text>
+                                    </Dropdown.Item>
+                                }
+
+                                <Dropdown.Item key="logout" color="error" withDivider onPress={() => logout}>
+                                    Log Out
+                                </Dropdown.Item>
+
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        :
+                        <Button onPress={signUpFunction} size='sm' bordered>
+                            Login With Google
+                        </Button>
+                    }
+
+                </Grid.Container>
+
             </Grid >
         </Grid.Container >
     );
