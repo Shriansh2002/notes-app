@@ -208,7 +208,8 @@ const NotesList = ({ loading,
                             backgroundImage: 'url(https://scientific-publishing.webshop.elsevier.com/wp-content/uploads/2021/09/2021-01-1-800x533.jpg)',
                             backgroundRepeat: 'no-repeat',
                             height: '90vh',
-                            backgroundSize: 'cover'
+                            backgroundSize: 'cover',
+                            borderRadius: '14px'
                         }}>
                             <Spacer />
                             <Grid.Container>
