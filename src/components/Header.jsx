@@ -1,20 +1,12 @@
-import { changeTheme, useTheme, Avatar, Button, Container, Grid, Dropdown, Link, Switch, Text } from '@nextui-org/react';
+import { Avatar, Button, Container, Grid, Dropdown, Link, Text } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-import { SunIcon } from './icons/SunIcon';
-import { MoonIcon } from './icons/MoonIcon';
 
 const Header = ({ primaryFunction = 'Home', admin, adminEmailAddresses }) => {
     const { loginWithGoogle, currentUser, logout } = useAuth();
-    const { isDark } = useTheme();
     const navigate = useNavigate();
 
-    const handleChange = () => {
-        const nextTheme = isDark ? 'light' : 'dark';
-        window.localStorage.setItem('data-theme', nextTheme); // you can use any storage
-        changeTheme(nextTheme);
-    };
 
     const signUpFunction = async () => {
         try {
@@ -41,15 +33,6 @@ const Header = ({ primaryFunction = 'Home', admin, adminEmailAddresses }) => {
             <Grid css={{ marginTop: 'auto', marginBottom: 'auto' }}>
                 <Grid.Container>
 
-                    <Switch
-                        size='xl'
-                        onChange={handleChange}
-                        iconOn={<SunIcon filled />}
-                        iconOff={<MoonIcon filled />}
-                        style={{
-                            marginRight: '10px'
-                        }}
-                    />
 
                     {currentUser ?
                         <Dropdown placement="bottom-left">
