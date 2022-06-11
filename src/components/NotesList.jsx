@@ -10,7 +10,9 @@ import {
     Loading,
     Row,
     Text,
-    Spacer
+    Spacer,
+    Card,
+    Link
 } from '@nextui-org/react';
 import { useAuth } from '../context/AuthContext';
 import Search from './Search';
@@ -37,10 +39,19 @@ const NotesList = ({ loading,
     filterAv,
     setFilterAv }) => {
 
-    const { currentUser } = useAuth();
+    const { currentUser, loginWithGoogle } = useAuth();
     const [visible, setVisible] = useState(false);
     const [selected, setSelected] = useState([]);
     const handler = () => setVisible(true);
+
+    const signUpFunction = async () => {
+        try {
+            await loginWithGoogle();
+        }
+        catch {
+            console.log(`error faced here.`);
+        }
+    };
 
     const closeHandler = () => {
         setVisible(false);
@@ -128,7 +139,7 @@ const NotesList = ({ loading,
                                                     ))}
                                                 </Checkbox.Group>
                                             </Row>
-                                            <Text>You're going to see: {selected.join(', ')}</Text>
+                                            <Text>You're going to see: {selected.join(", ")}</Text>
 
                                         </Modal.Body>
                                         <Modal.Footer>
@@ -193,10 +204,55 @@ const NotesList = ({ loading,
                     </>
                     :
                     <>
-                        <Container>
-                            <Text blockquote size={20} color='error'>
-                                You need to be Logged in to View and Create {process.env.REACT_APP_APPLICATION_NAME}
-                            </Text>
+                        <Container style={{
+                            backgroundImage: 'url(https://scientific-publishing.webshop.elsevier.com/wp-content/uploads/2021/09/2021-01-1-800x533.jpg)',
+                            backgroundRepeat: 'no-repeat',
+                            height: '90vh',
+                            backgroundSize: 'cover'
+                        }}>
+                            <Spacer />
+                            <Grid.Container>
+                                <Container>
+                                    <Grid>
+                                        <Container>
+                                            <Card css={{ p: "$6", height: '30vh' }}>
+                                                <Card.Header>
+                                                    <img
+                                                        alt="nextui logo"
+                                                        src="https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/04/a1/ae/04a1ae15-ca02-a673-13e6-d2c79161c75d/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/400x400.png"
+                                                        width="34px"
+                                                        height="34px"
+                                                    />
+                                                    <Grid.Container css={{ pl: "$6" }}>
+                                                        <Grid xs={12}>
+                                                            <Text h4 css={{ lineHeight: "$xs" }}>
+                                                                Note Flow
+                                                            </Text>
+                                                        </Grid>
+                                                        <Grid xs={12}>
+                                                            <Text css={{ color: "$accents8" }}>notework.in</Text>
+                                                        </Grid>
+                                                    </Grid.Container>
+                                                </Card.Header>
+                                                <Card.Body css={{ py: "$2" }}>
+                                                    Our App helps you create and share your content with the people in your life.
+                                                </Card.Body>
+                                                <Card.Footer>
+                                                    <Text h5 onClick={signUpFunction} style={{
+                                                        cursor: 'pointer'
+                                                    }}>
+                                                        <Link icon>
+                                                            Login To Continue
+                                                        </Link>
+                                                    </Text>
+                                                </Card.Footer>
+                                            </Card>
+                                        </Container>
+                                    </Grid>
+                                </Container>
+
+                            </Grid.Container>
+
                         </Container>
                     </>
                 }

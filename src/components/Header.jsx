@@ -22,9 +22,16 @@ const Header = ({ primaryFunction = 'Home', admin, adminEmailAddresses }) => {
             <Grid>
                 <Container>
                     <Link href="/" css={{ color: 'black' }}>
-                        {admin ?
-                            <Text h2>ADMIN</Text> :
-                            <Text h2>HOME</Text>
+                        {currentUser
+                            ? <>
+                                {admin ?
+                                    <Text h2>ADMIN</Text> :
+                                    <Text h2>HOME</Text>
+                                }
+                            </>
+                            : <>
+                                <Text h2>LOGIN</Text>
+                            </>
                         }
                     </Link>
                 </Container>
@@ -73,7 +80,7 @@ const Header = ({ primaryFunction = 'Home', admin, adminEmailAddresses }) => {
                                 }
 
                                 <Dropdown.Item key="logout" color="error" withDivider>
-                                    <Text onClick={() => logout()}>
+                                    <Text b color='error' onClick={() => logout()}>
                                         Log Out
                                     </Text>
                                 </Dropdown.Item>
