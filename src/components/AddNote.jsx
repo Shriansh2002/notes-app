@@ -43,7 +43,7 @@ const AddNote = ({ handleAddNote }) => {
 
     const handleSave = () => {
         if (noteText.trim().length > 0) {
-            console.log(genreSelected);
+            // console.log(genreSelected);
             handleAddNote(noteText, currentUser, fileImageURL, genreSelected, noteTextDescription);
             setNoteText('');
             setNoteTextDescription('');

@@ -32,7 +32,7 @@ const Homepage = ({ adminEmailAddresses }) => {
             });
         }
         else {
-            console.log(filterAv);
+            // console.log(filterAv);
 
             const q = query(refValue, where('genre', 'in', filterAv), orderBy("text"));
             onSnapshot(q, (snapshot) => {

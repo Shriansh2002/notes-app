@@ -72,8 +72,10 @@ const Header = ({ primaryFunction = 'Home', admin, adminEmailAddresses }) => {
                                     </Dropdown.Item>
                                 }
 
-                                <Dropdown.Item key="logout" color="error" withDivider onPress={() => logout}>
-                                    Log Out
+                                <Dropdown.Item key="logout" color="error" withDivider>
+                                    <Text onClick={() => logout()}>
+                                        Log Out
+                                    </Text>
                                 </Dropdown.Item>
 
                             </Dropdown.Menu>
