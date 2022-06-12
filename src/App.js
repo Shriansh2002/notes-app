@@ -54,7 +54,6 @@ function App() {
 
         {loading ? <Loading /> :
           <Routes>
-            {console.log(adminEmailAddresses)}
 
             <Route path='/' element={<Homepage adminEmailAddresses={adminEmailAddresses} />} />
             <Route exact path='/home' element={<Homepage adminEmailAddresses={adminEmailAddresses} />} />
