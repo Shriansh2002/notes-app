@@ -5,42 +5,30 @@ import { StyledBadge } from "../StyledBadge";
 import { IconButton } from "../IconButton";
 import { EditIcon } from "../EditIcon";
 import { DeleteIcon } from "../DeleteIcon";
+import { useEffect, useState } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
+import db from '../../../firebaseConfig';
 
 const columns = [
     { name: "NAME", uid: "name" },
-    { name: "ROLE", uid: "role" },
-    { name: "STATUS", uid: "status" },
+    { name: "Creation Time", uid: "creation-time" },
+    { name: "Last Sign-In Time", uid: "last-signIn-time" },
     { name: "ACTIONS", uid: "actions" },
 ];
-
 
 const renderCell = (user, columnKey) => {
     const cellValue = user[columnKey];
     switch (columnKey) {
         case "name":
             return (
-                <User squared src={user.avatar} name={cellValue} css={{ p: 0 }}>
+                <User squared src={user.photoURL} name={user.displayName} css={{ p: 0 }}>
                     {user.email}
                 </User>
             );
-        case "role":
-            return (
-                <Col>
-                    <Row>
-                        <Text b size={14} css={{ tt: "capitalize" }}>
-                            {cellValue}
-                        </Text>
-                    </Row>
-                    <Row>
-                        <Text b size={13} css={{ tt: "capitalize", color: "$accents7" }}>
-                            {user.team}
-                        </Text>
-                    </Row>
-                </Col>
-            );
-        case "status":
-            return <StyledBadge type={user.status}>{cellValue}</StyledBadge>;
-
+        case "creation-time":
+            return <StyledBadge type={user.status}>{user.creationTime}</StyledBadge>;
+        case "last-signIn-time":
+            return <StyledBadge type={user.status}>{user.lastSignInTime}</StyledBadge>;
         case "actions":
             return (
                 <Row justify="center" align="center">
@@ -77,53 +65,62 @@ const renderCell = (user, columnKey) => {
 };
 
 const NoteTable = () => {
+    const [users, setUserData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const users = [
-        {
-            id: 1,
-            name: "Tony Reichert",
-            role: "CEO",
-            team: "Management",
-            status: "active",
-            age: "29",
-            avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-            email: "tony.reichert@example.com",
-        },
-    ];
+    const runIT = async () => {
+        const q = collection(db, 'UsersAVAIL');
+        onSnapshot(q, (snapshot) => {
+            setUserData(snapshot.docs.map((doc) => doc.data()));
+            setLoading(false);
+        });
+    };
+    useEffect(() => {
+        runIT();
+    }, []);
+
+    console.log(users[0]);
 
     return (
         <>
-            <Text h3>Users</Text>
-            <Table
-                bordered
-                aria-label="Example table with custom cells"
-                css={{
-                    height: "auto",
-                    minWidth: "100%",
-                }}
-                selectionMode="none"
-            >
-                <Table.Header columns={columns}>
-                    {(column) => (
-                        <Table.Column
-                            key={column.uid}
-                            hideHeader={column.uid === "actions"}
-                            align={column.uid === "actions" ? "center" : "start"}
-                        >
-                            {column.name}
-                        </Table.Column>
-                    )}
-                </Table.Header>
-                <Table.Body items={users}>
-                    {(item) => (
-                        <Table.Row>
-                            {(columnKey) => (
-                                <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
+            {!loading &&
+                <>
+                    <Text h3>Users</Text>
+                    <Table
+                        bordered
+                        aria-label="Example table with custom cells"
+                        css={{
+                            height: "auto",
+                            minWidth: "100%",
+                        }}
+                        selectionMode="none"
+                    >
+                        <Table.Header columns={columns}>
+                            {(column) => (
+                                <Table.Column
+                                    key={column.uid}
+                                    align={column.uid === "actions" ? "center" : "start"}
+                                >
+                                    {column.name}
+                                </Table.Column>
                             )}
-                        </Table.Row>
-                    )}
-                </Table.Body>
-            </Table>
+                        </Table.Header>
+                        <Table.Body items={users}>
+                            {users.map((singUser, index) => {
+                                return (
+                                    <Table.Row key={index}>
+                                        {(columnKey) => (
+                                            <Table.Cell>
+                                                {renderCell(singUser, columnKey)}
+                                            </Table.Cell>
+                                        )}
+                                    </Table.Row>
+                                );
+                            })}
+                        </Table.Body>
+                    </Table>
+                </>
+            }
         </>
     );
 };
