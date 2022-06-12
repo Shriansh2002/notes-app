@@ -84,7 +84,7 @@ const NotesList = ({ loading,
                                     </Grid>
                                 }
                                 <Grid.Container justify='space-between'>
-                                    <Grid fluid>
+                                    <Grid>
                                         <Container>
                                             <Row>
                                                 {(notes[0]?.userEmail === currentUser.email) && showAddNewNote
