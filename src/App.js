@@ -21,11 +21,9 @@ function PrivateRoute({ children }) {
 function AdminRoute({ children, adminEmailAddresses }) {
   const { currentUser } = useAuth();
 
-  return adminEmailAddresses.includes(currentUser.email)
-    ? children
-    :
-    <>
-      {alert('You are Not Authenticated to Do This Work')}
+  return currentUser &&
+    adminEmailAddresses.includes(currentUser.email) ? children
+    : <>
       <Navigate to="/" />
     </>;
 }
