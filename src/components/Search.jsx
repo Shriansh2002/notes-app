@@ -10,6 +10,9 @@ const Search = ({ handleSearchNote }) => {
                 clearable
                 placeholder="Type to search ..."
                 onChange={(event) => handleSearchNote(event.target.value)}
+                style={{
+                    width: '80vw'
+                }}
             />
         </Container>
     );

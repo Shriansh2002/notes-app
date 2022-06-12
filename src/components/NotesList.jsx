@@ -61,6 +61,7 @@ const NotesList = ({ loading,
         <>
             {currentUser && !showSearch &&
                 <>
+                    <Spacer />
                     <Search handleSearchNote={setSearchText} />
                     <Container>
                         {searchText && <h3>You Searched for {searchText} </h3>}
@@ -83,7 +84,7 @@ const NotesList = ({ loading,
                                     </Grid>
                                 }
                                 <Grid.Container justify='space-between'>
-                                    <Grid>
+                                    <Grid fluid>
                                         <Container>
                                             <Row>
                                                 {(notes[0]?.userEmail === currentUser.email) && showAddNewNote
@@ -98,17 +99,18 @@ const NotesList = ({ loading,
                                     <Grid>
                                         <Grid.Container>
                                             {filterAv &&
-                                                <Container>
+                                                <Container style={{ display: 'flex' }}>
                                                     Showing Results for&nbsp;
                                                     <>
                                                         {(filterAv.length === genreValues.length) || (filterAv.length === 0)
                                                             ? <Text b>All</Text>
-                                                            : <Text b>{filterAv.join(', ')}</Text>
+                                                            : <Text b>{filterAv.length} Genres</Text>
                                                         }
-                                                        &nbsp;
                                                     </>
-                                                    <MdFilterList onClick={handler} size={20} cursor='pointer' />
-                                                    <Spacer />
+                                                    <MdFilterList onClick={handler} size={20} cursor='pointer' style={{
+                                                        margin: 'auto'
+                                                    }} />
+
                                                 </Container>
                                             }
                                         </Grid.Container>

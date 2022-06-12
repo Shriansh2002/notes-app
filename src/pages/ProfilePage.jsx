@@ -27,7 +27,7 @@ const ProfilePage = ({ adminEmailAddresses }) => {
 
     return (
         <Container fluid>
-            <Header />
+            <Header adminEmailAddresses={adminEmailAddresses} />
 
             <Grid.Container>
                 <Container>
