@@ -1,11 +1,10 @@
 import { Container, Grid, Link, Row, Text } from '@nextui-org/react';
 import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import Header from '../components/Header';
-import NotesList from '../components/NotesList';
-// import { useAuth } from '../context/AuthContext';
-import db, { auth } from '../firebaseConfig';
 
+import { Header, NotesList } from '../components/';
+
+import db, { auth } from '../firebaseConfig';
 import { deleteNote, editNote, handleAddNote } from '../func/index';
 
 const ProfilePage = ({ adminEmailAddresses }) => {

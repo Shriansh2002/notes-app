@@ -15,8 +15,8 @@ import {
     User
 } from '@nextui-org/react';
 
-import EditIcon from './icons/EditIcon';
-import DeleteIcon from './icons/DeleteIcon';
+import { EditIcon, DeleteIcon } from './';
+
 import { auth } from '../firebaseConfig';
 
 const Note = ({ note, handleDeleteNote, handleEditNote }) => {

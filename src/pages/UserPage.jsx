@@ -2,8 +2,9 @@ import { Link, Container, Grid, Row, Text } from '@nextui-org/react';
 import { collection, getDocs, onSnapshot, orderBy, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../components/Header';
-import NotesList from '../components/NotesList';
+
+import { Header, NotesList } from '../components/';
+
 import db from '../firebaseConfig';
 
 const UserPage = ({ adminEmailAddresses }) => {

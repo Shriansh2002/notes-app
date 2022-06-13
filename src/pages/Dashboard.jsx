@@ -1,6 +1,5 @@
 import { Container, Input, Spacer } from "@nextui-org/react";
-import Header from '../components/Header';
-import UserTable from '../components/Dash-Components/UserTable';
+import { Header, UserTable } from '../components';
 
 
 export default function Dashboard() {

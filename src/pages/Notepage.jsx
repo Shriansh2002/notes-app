@@ -11,7 +11,7 @@ import {
 } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../components/Header';
+import { Header } from '../components';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import db from '../firebaseConfig';
 

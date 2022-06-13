@@ -1,13 +1,14 @@
+import { useEffect, useState } from 'react';
 import { Table, Row, Col, Tooltip, User, Text } from '@nextui-org/react';
 
-import { EyeIcon } from "./EyeIcon";
-import { StyledBadge } from "./StyledBadge";
-import { IconButton } from "./IconButton";
-import { EditIcon } from "./EditIcon";
-import { DeleteIcon } from "./DeleteIcon";
-import { useEffect, useState } from 'react';
+import { EyeIcon } from "./Dash-Components/EyeIcon";
+import { StyledBadge } from "./Dash-Components/StyledBadge";
+import { IconButton } from "./Dash-Components/IconButton";
+import { EditIcon } from "./Dash-Components/EditIcon";
+import { DeleteIcon } from "./Dash-Components/DeleteIcon";
+
 import { collection, onSnapshot } from 'firebase/firestore';
-import db from '../../firebaseConfig';
+import db from '../firebaseConfig';
 
 const columns = [
     { name: "NAME", uid: "name" },

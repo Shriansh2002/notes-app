@@ -8,8 +8,7 @@ import { deleteNote, editNote } from '../func/index';
 
 
 // components
-import Header from '../components/Header';
-import NotesList from '../components/NotesList';
+import { Header, NotesList } from '../components';
 
 const Homepage = ({ adminEmailAddresses }) => {
     const [notes, setNotes] = useState([]);
