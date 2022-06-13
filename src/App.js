@@ -1,17 +1,14 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import './App.css';
 import AuthProvider, { useAuth } from './context/AuthContext';
+import { Loading } from '@nextui-org/react';
+import './App.css';
 
 // pages
-import Homepage from './pages/Homepage';
-import Notepage from './pages/Notepage';
-import ProfilePage from './pages/ProfilePage';
-import UserPage from './pages/UserPage.jsx';
-import Dashboard from './pages/Dashboard/Dashboard';
-import { useEffect, useState } from 'react';
+import { Homepage, Dashboard, Notepage, ProfilePage, UserPage } from './pages';
+
 import { doc, getDoc } from 'firebase/firestore';
 import db from './firebaseConfig';
-import { Loading } from '@nextui-org/react';
 
 function PrivateRoute({ children }) {
   const { currentUser } = useAuth();

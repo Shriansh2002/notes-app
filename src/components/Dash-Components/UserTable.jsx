@@ -1,13 +1,13 @@
 import { Table, Row, Col, Tooltip, User, Text } from '@nextui-org/react';
 
-import { EyeIcon } from "../EyeIcon";
-import { StyledBadge } from "../StyledBadge";
-import { IconButton } from "../IconButton";
-import { EditIcon } from "../EditIcon";
-import { DeleteIcon } from "../DeleteIcon";
+import { EyeIcon } from "./EyeIcon";
+import { StyledBadge } from "./StyledBadge";
+import { IconButton } from "./IconButton";
+import { EditIcon } from "./EditIcon";
+import { DeleteIcon } from "./DeleteIcon";
 import { useEffect, useState } from 'react';
 import { collection, onSnapshot } from 'firebase/firestore';
-import db from '../../../firebaseConfig';
+import db from '../../firebaseConfig';
 
 const columns = [
     { name: "NAME", uid: "name" },
@@ -64,7 +64,7 @@ const renderCell = (user, columnKey) => {
     }
 };
 
-const NoteTable = () => {
+const UserTable = () => {
     const [users, setUserData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -125,4 +125,4 @@ const NoteTable = () => {
     );
 };
 
-export default NoteTable;
+export default UserTable;
